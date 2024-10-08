@@ -1,4 +1,4 @@
-from actuators import LED
+from actuators.LED import LED
 import time
 from rpi_ws281x import *
 
