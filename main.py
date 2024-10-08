@@ -1,16 +1,12 @@
-import time
-import board
-import digitalio
-
-PIN = board.D18
+from gpiozero import LED
+from time import sleep
 
 print("hello blinky!")
 
-led = digitalio.DigitalInOut(PIN)
-led.direction = digitalio.Direction.OUTPUT
+led = LED(17)
 
 while True:
-    led.value = True
-    time.sleep(0.5)
-    led.value = False
-    time.sleep(0.5)
+    led.on()
+    sleep(1)
+    led.off()
+    sleep(1)
