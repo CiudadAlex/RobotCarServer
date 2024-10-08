@@ -1,5 +1,8 @@
-from gpiozero import LED
+from gpiozero.pins.lgpio import LGPIOFactory
+from gpiozero import Device, LED
 from time import sleep
+
+Device.pin_factory = LGPIOFactory()
 
 print("hello blinky!")
 
