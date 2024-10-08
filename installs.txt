@@ -24,3 +24,7 @@ sudo nano .venv/lib/python3.11/site-packages/Adafruit_GPIO/Platform.py
 sudo nano .venv/lib/python3.11/site-packages/Adafruit_PureIO/smbus.py
 (usar bus i2c-11)
 
+_____________________________
+
+sudo ./.venv/bin/pip3 install board==1.0
+sudo ./.venv/bin/pip3 install Adafruit-Blinka==8.48.0

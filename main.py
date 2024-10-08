@@ -1,16 +1,16 @@
-from actuators.LED import LED
 import time
-from rpi_ws281x import *
+import board
+import digitalio
 
-if __name__ == '__main__':
-    while True:
-        led = LED()
-        try:
-            led.colorWipe(Color(255,0,0))
-            time.sleep(1)
-            led.colorWipe(Color(0,255,0))
-            time.sleep(1)
-            led.colorWipe(Color(0,0,255))
-            time.sleep(1)
-        except:
-            led.colorWipe(Color(0,0,0))
+PIN = board.D18
+
+print("hello blinky!")
+
+led = digitalio.DigitalInOut(PIN)
+led.direction = digitalio.Direction.OUTPUT
+
+while True:
+    led.value = True
+    time.sleep(0.5)
+    led.value = False
+    time.sleep(0.5)
