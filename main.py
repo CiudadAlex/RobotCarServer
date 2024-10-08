@@ -3,7 +3,7 @@ from time import sleep
 
 print("hello blinky!")
 
-led = LED(17)
+led = LED(18)
 
 while True:
     led.on()
