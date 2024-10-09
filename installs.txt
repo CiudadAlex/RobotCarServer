@@ -32,4 +32,7 @@ sudo ./.venv/bin/pip3 install Adafruit-Blinka==8.48.0
 _____________________________
 
 sudo ./.venv/bin/pip3 install gpiozero==2.0.1
+sudo ./.venv/bin/pip3 install lgpio==0.2.2.0
 
+
+sudo ./.venv/bin/pip3 install Pi5Neo==1.0.5

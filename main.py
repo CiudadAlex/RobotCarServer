@@ -1,15 +1,14 @@
-from gpiozero.pins.lgpio import LGPIOFactory
-from gpiozero import Device, LED
-from time import sleep
-
-Device.pin_factory = LGPIOFactory()
+from pi5neo import Pi5Neo
 
 print("hello blinky!")
 
-led = LED(18)
+# Initialize the Pi5Neo class with 6 LEDs and an SPI speed of 800kHz
+neo = Pi5Neo('/dev/spidev10.0', 6, 800)
 
-while True:
-    led.on()
-    sleep(1)
-    led.off()
-    sleep(1)
+# Fill the strip with a red color
+neo.fill_strip(255, 0, 0)
+neo.update_strip()  # Commit changes to the LEDs
+
+# Set the 5th LED to blue
+neo.set_led_color(4, 0, 0, 255)
+neo.update_strip()
