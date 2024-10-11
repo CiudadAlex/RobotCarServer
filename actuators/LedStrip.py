@@ -45,6 +45,7 @@ class LedStrip:
             r = r_start + i * (r_end - r_start)/steps
             g = g_start + i * (g_end - g_start)/steps
             b = b_start + i * (b_end - b_start)/steps
+            print(f"(r, g, b) = {int(r)}, {int(g)}, {int(b)}")
             self.strip.set_color_componets(int(r), int(g), int(b))
             time.sleep(wait)
 

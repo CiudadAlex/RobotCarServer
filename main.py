@@ -15,6 +15,8 @@ if __name__ == '__main__':
 
     ledStripManager.stop()
 
+    time.sleep(1)
+
 os._exit(0)
 
 
