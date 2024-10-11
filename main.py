@@ -4,11 +4,11 @@ import time
 if __name__ == '__main__':
 
     ledStripManager = LedStripManager()
-    ledStripManager.police()
+    ledStripManager.rainbow()
 
     time.sleep(10)
 
-    ledStripManager.rainbow()
+    ledStripManager.police()
 
     time.sleep(10)
 
