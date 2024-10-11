@@ -8,7 +8,8 @@ import ultra
 import FPV
 import psutil
 import servo
-from actuators import LED, move
+from actuators import LED
+from _repo import move
 import findline
 
 step_set = 1
