@@ -1,5 +1,6 @@
 from managers.LedStripManager import LedStripManager
 import time
+import os
 
 if __name__ == '__main__':
 
@@ -13,6 +14,9 @@ if __name__ == '__main__':
     time.sleep(10)
 
     ledStripManager.stop()
+
+os._exit(0)
+
 
 
 # FIXME LED breathe
