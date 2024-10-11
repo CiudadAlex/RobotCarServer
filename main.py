@@ -14,3 +14,8 @@ if __name__ == '__main__':
 
     ledStripManager.stop()
 
+
+# FIXME LED breathe
+# FIXME LED alert
+# FIXME LED individually
+
