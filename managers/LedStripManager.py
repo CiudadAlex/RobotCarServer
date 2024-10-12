@@ -42,4 +42,7 @@ class LedStripManager:
         self.func = self.ledStripChoreographer.breathe
         self.ledStripChoreographer.stop()
 
+    def rainbow_flag(self):
+        self.func = self.ledStripChoreographer.rainbow_flag
+        self.ledStripChoreographer.stop()
 
