@@ -4,10 +4,6 @@ import os
 
 if __name__ == '__main__':
 
-    steps = 20
-    for k in range(0, steps + 1):
-        print(f"(k) = {k}")
-
     ledStripManager = LedStripManager()
     ledStripManager.rainbow()
 
