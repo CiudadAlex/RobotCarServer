@@ -41,11 +41,13 @@ class LedStrip:
 
     def color_transition(self, r_start, g_start, b_start, r_end, g_end, b_end, steps, wait=0.05):
 
+        print(f"{r_start}, {g_start}, {b_start} // {r_end}, {g_end}, {b_end} // {steps}")
+
         for k in range(0, steps + 1):
             r = r_start + k * (r_end - r_start)/steps
             g = g_start + k * (g_end - g_start)/steps
             b = b_start + k * (b_end - b_start)/steps
-            print(f"(r, g, b) = {r}, {g}, {b} // {r_start}, {g_start}, {b_start} // {r_end}, {g_end}, {b_end} // {steps} // {k}")
+            print(f"(r, g, b) = {r}, {g}, {b}  // k = {k}")
             self.strip.set_color_componets(int(r), int(g), int(b))
             time.sleep(wait)
 
