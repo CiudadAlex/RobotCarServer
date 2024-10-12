@@ -1,4 +1,5 @@
 from managers.LedStripManager import LedStripManager
+import os
 
 
 class KeyboardCommander:
@@ -12,8 +13,13 @@ class KeyboardCommander:
             "led alarm": self.ledStripManager.alarm,
             "led rainbow": self.ledStripManager.rainbow,
             "led breathe": self.ledStripManager.breathe,
-            "led rainbow_flag": self.ledStripManager.rainbow_flag
+            "led rainbow_flag": self.ledStripManager.rainbow_flag,
+            "exit": self.exit
         }
+
+    @staticmethod
+    def exit():
+        os._exit(0)
 
     def start(self):
 

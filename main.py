@@ -1,26 +1,14 @@
-from managers.LedStripManager import LedStripManager
-import time
-import os
+from commanders.KeyboardCommander import KeyboardCommander
+
 
 if __name__ == '__main__':
 
-    ledStripManager = LedStripManager()
-    ledStripManager.rainbow()
-
-    time.sleep(10)
-
-    ledStripManager.police()
-
-    time.sleep(10)
-
-    ledStripManager.stop()
-
-    time.sleep(1)
-
-os._exit(0)
+    keyboardCommander = KeyboardCommander()
+    keyboardCommander.start()
 
 
-
-# FIXME KeyboardCommander
+# FIXME test KeyboardCommander
+# FIXME Camera
+# FIXME Microphone
 
 
