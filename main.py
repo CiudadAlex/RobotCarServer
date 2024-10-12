@@ -22,6 +22,6 @@ os._exit(0)
 
 
 # FIXME LED breathe
-# FIXME LED alert
+# FIXME KeyboardCommander
 # FIXME LED individually
 

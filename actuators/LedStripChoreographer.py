@@ -17,23 +17,29 @@ class LedStripChoreographer:
         if not self.active:
             raise Exception("Interruption")
 
-    def police(self):
+    def two_colors_alternate(self, color1, color2, time1, time2):
 
         self.active = True
 
         while self.active:
 
             try:
-                self.strip.set_color(LedStrip.RED)
-                time.sleep(0.5)
+                self.strip.set_color(color1)
+                time.sleep(time1)
                 self.check_active()
-                self.strip.set_color(LedStrip.BLUE)
-                time.sleep(0.5)
+                self.strip.set_color(color2)
+                time.sleep(time2)
             except Exception:
                 traceback.print_exc(file=sys.stdout)
                 self.stop()
 
         self.strip.set_color(LedStrip.BLACK)
+
+    def police(self):
+        self.two_colors_alternate(LedStrip.RED, LedStrip.BLUE, 0.5, 0.5)
+
+    def alarm(self):
+        self.two_colors_alternate(LedStrip.WHITE, LedStrip.BLACK, 0.3, 0.3)
 
     def rainbow(self):
 

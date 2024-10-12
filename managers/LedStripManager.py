@@ -30,6 +30,10 @@ class LedStripManager:
         self.func = self.ledStripChoreographer.police
         self.ledStripChoreographer.stop()
 
+    def alarm(self):
+        self.func = self.ledStripChoreographer.alarm
+        self.ledStripChoreographer.stop()
+
     def rainbow(self):
         self.func = self.ledStripChoreographer.rainbow
         self.ledStripChoreographer.stop()
