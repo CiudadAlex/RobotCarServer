@@ -12,6 +12,7 @@ class LedStrip:
     YELLOW = Color(255, 255, 0)
     MAGENTA = Color(255, 0, 255)
     CYAN = Color(0, 255, 255)
+    ORANGE = Color(255, 128, 0)
 
     def __init__(self):
         self.LED_COUNT = 16        # Number of LED pixels.
@@ -38,6 +39,13 @@ class LedStrip:
             self.strip.setPixelColor(i, color)
             self.strip.show()
             time.sleep(wait)
+
+    def set_colors_list(self, list_colors):
+        """Wipe color across display a pixel at a time."""
+        max_item = min(len(list_colors), self.strip.numPixels())
+        for i in range(max_item):
+            self.strip.setPixelColor(i, list_colors[i])
+            self.strip.show()
 
     def color_transition(self, r_start, g_start, b_start, r_end, g_end, b_end, steps, wait=0.05):
 

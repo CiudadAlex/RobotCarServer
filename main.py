@@ -22,5 +22,5 @@ os._exit(0)
 
 
 # FIXME KeyboardCommander
-# FIXME LED individually
+
 

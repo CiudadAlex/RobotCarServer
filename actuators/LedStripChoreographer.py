@@ -89,4 +89,7 @@ class LedStripChoreographer:
             (255, 255, 255)]
         self.circular_transition_of_colors(list_tuples_color_components)
 
+    def rainbow_flag(self):
+        list_colors = [LedStrip.RED, LedStrip.ORANGE, LedStrip.YELLOW, LedStrip.GREEN, LedStrip.CYAN, LedStrip.BLUE]
+        self.strip.set_colors_list(list_colors)
 
