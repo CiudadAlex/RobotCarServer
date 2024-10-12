@@ -1,5 +1,7 @@
 from actuators.LedStrip import LedStrip
 import time
+import sys
+import traceback
 
 
 class LedStripChoreographer:
@@ -27,7 +29,8 @@ class LedStripChoreographer:
                 self.check_active()
                 self.strip.set_color(LedStrip.BLUE)
                 time.sleep(0.5)
-            except:
+            except Exception:
+                traceback.print_exc(file=sys.stdout)
                 self.stop()
 
         self.strip.set_color(LedStrip.BLACK)
@@ -52,7 +55,8 @@ class LedStripChoreographer:
                 self.strip.color_transition(255,   0, 255, 255,   0,   0, 20, wait=0.05)
                 self.check_active()
 
-            except:
+            except Exception:
+                traceback.print_exc(file=sys.stdout)
                 self.stop()
 
         self.strip.set_color(LedStrip.BLACK)
