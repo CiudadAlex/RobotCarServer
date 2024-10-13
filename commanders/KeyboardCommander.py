@@ -27,13 +27,13 @@ class KeyboardCommander:
             command = input("Insert command: ")
 
             if command not in self.command_map.keys():
-                help()
+                self.help_commands()
             else:
                 func = self.command_map[command]
                 func()
                 print("Executed")
 
-    def help(self):
+    def help_commands(self):
         print("Command list:")
 
         for command in self.command_map.keys():

@@ -7,7 +7,6 @@ if __name__ == '__main__':
     keyboardCommander.start()
 
 
-# FIXME test KeyboardCommander
 # FIXME Camera
 # FIXME Microphone
 
