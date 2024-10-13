@@ -1,6 +1,13 @@
 python3 -m venv .venv
 source .venv/bin/activate
 
+sudo apt-get -y install libqtgui4 libhdf5-dev libhdf5-serial-dev libatlas-base-dev libjasper-dev libqt4-test
+sudo apt-get install -y util-linux procps hostapd iproute2 iw haveged dnsmasq
+sudo apt-get install -y python3-smbus
+sudo apt-get install -y i2c-tools
+sudo apt-get install -y python3-opencv
+sudo apt-get install -y libfreetype6-dev libjpeg-dev build-essential
+
 sudo ./.venv/bin/pip3 install RPi.GPIO==0.7.1
 sudo ./.venv/bin/pip3 install adafruit-pca9685==1.0.1
 sudo -H ./.venv/bin/pip3 install --upgrade luma.oled==3.13.0
