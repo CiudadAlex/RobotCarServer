@@ -23,3 +23,7 @@ sudo ./.venv/bin/pip3 install psutil==6.0.0
 sudo ./.venv/bin/pip3 install opencv-python==4.10.0.84
 sudo ./.venv/bin/pip3 install picamera==1.13
 
+sudo apt install -y python3-libcamera python3-kms++
+sudo apt install -y python3-prctl libatlas-base-dev ffmpeg libopenjp2-7 python3-pip
+sudo ./.venv/bin/pip3 install numpy --upgrade
+sudo ./.venv/bin/pip3 install picamera2
