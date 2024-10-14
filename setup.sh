@@ -20,12 +20,12 @@ sudo ./.venv/bin/pip3 install imutils==0.5.4
 sudo ./.venv/bin/pip3 install zmq==0.0.0
 sudo ./.venv/bin/pip3 install pybase64==1.4.0
 sudo ./.venv/bin/pip3 install psutil==6.0.0
-sudo ./.venv/bin/pip3 install opencv-python==4.10.0.84
+# sudo ./.venv/bin/pip3 install opencv-python==4.10.0.84
 sudo ./.venv/bin/pip3 install picamera==1.13
 
-sudo apt install -y python3-libcamera python3-kms++
-sudo apt install -y python3-prctl libatlas-base-dev ffmpeg libopenjp2-7 python3-pip
-sudo apt install -y python3-picamera2
-sudo ./.venv/bin/pip3 install numpy --upgrade
-sudo ./.venv/bin/pip3 install libpcap==1.11.0b12
-sudo ./.venv/bin/pip3 install picamera2
+# sudo apt install -y python3-libcamera python3-kms++
+# sudo apt install -y python3-prctl libatlas-base-dev ffmpeg libopenjp2-7 python3-pip
+# sudo apt install -y python3-picamera2
+# sudo ./.venv/bin/pip3 install numpy --upgrade
+# sudo ./.venv/bin/pip3 install libpcap==1.11.0b12
+# sudo ./.venv/bin/pip3 install picamera2
