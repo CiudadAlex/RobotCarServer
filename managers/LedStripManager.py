@@ -1,19 +1,17 @@
-import threading
+from threading import Thread
 from actuators.LedStripChoreographer import LedStripChoreographer
 import time
 
 
-class LedStripManager:
+class LedStripManager(Thread):
 
     def __init__(self):
-
+        super().__init__()
         self.ledStripChoreographer = LedStripChoreographer()
         self.func = None
+        self.start()
 
-        self.thread = threading.Thread(target=self.execute)
-        self.thread.start()
-
-    def execute(self):
+    def run(self):
 
         while True:
 
