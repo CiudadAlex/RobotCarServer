@@ -18,6 +18,7 @@ class LedStripManager:
         while True:
 
             if self.func is None:
+                self.ledStripChoreographer.black()
                 time.sleep(0.5)
             else:
                 self.func()
