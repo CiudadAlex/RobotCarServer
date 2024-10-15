@@ -1,12 +1,7 @@
-# from commanders.KeyboardCommander import KeyboardCommander
-
 from picamera2 import Picamera2
 import time
 
 if __name__ == '__main__':
-
-    # keyboardCommander = KeyboardCommander()
-    # keyboardCommander.start()
 
     picam2 = Picamera2()
 
@@ -15,9 +10,10 @@ if __name__ == '__main__':
 
     picam2.start()
 
-    time.sleep(2)
-
-    picam2.capture_file("test_photo.jpg")
+    for i in range(10):
+        time.sleep(2)
+        print("take photo")
+        picam2.capture_file(f"test_photo_{i}.jpg")
 
 
 # FIXME Camera server
