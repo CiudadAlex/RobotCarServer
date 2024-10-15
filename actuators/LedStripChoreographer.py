@@ -93,3 +93,6 @@ class LedStripChoreographer:
         list_colors = [LedStrip.RED, LedStrip.ORANGE, LedStrip.YELLOW, LedStrip.GREEN, LedStrip.CYAN, LedStrip.BLUE]
         self.strip.set_colors_list(list_colors)
 
+    def black(self):
+        self.strip.set_color(LedStrip.BLACK)
+
