@@ -18,5 +18,5 @@ if __name__ == '__main__':
 
 # FIXME Camera server
 # FIXME Microphone
-
+# FIXME try: python3 -m venv --system-site-packages .venv
 
