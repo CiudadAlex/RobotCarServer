@@ -1,9 +1,7 @@
 # from commanders.KeyboardCommander import KeyboardCommander
 
 from picamera2 import Picamera2
-# from time import sleep
-# from picamera import PiCamera
-
+import time
 
 if __name__ == '__main__':
 
@@ -11,17 +9,18 @@ if __name__ == '__main__':
     # keyboardCommander.start()
 
     picam2 = Picamera2()
-    picam2.start_and_capture_file("test.jpg")
 
-'''
-    camera = PiCamera()
-    camera.resolution = (1024, 768)
-    camera.start_preview()
-    sleep(2)
-    camera.capture('foo.jpg')
-'''
+    camera_config = picam2.create_preview_configuration()
+    picam2.configure(camera_config)
 
-# FIXME Camera
+    picam2.start()
+
+    time.sleep(2)
+
+    picam2.capture_file("test_photo.jpg")
+
+
+# FIXME Camera server
 # FIXME Microphone
 
 
