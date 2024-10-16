@@ -1,69 +1,33 @@
-from threading import Thread
-import threading
-import socket
-import struct
+from servers.AbstractStreamServer import AbstractStreamServer, Item
 from picamera2 import Picamera2
-from utils.TimeRegulator import TimeRegulator
 import time
 
 
-class ImageStreamServer(Thread):
+class ImageStreamServer(AbstractStreamServer):
 
     def __init__(self):
-        super().__init__()
-        self.last_image = None
-        self.start()
+        super().__init__(port=8000, check_collect_interval_millis=50, check_send_interval_millis=50)
 
-    def run(self):
-        thread_camera = threading.Thread(target=self.get_images_from_camera)
-        thread_camera.start()
+        self.picam2 = Picamera2()
+        camera_config = self.picam2.create_still_configuration()
+        self.picam2.configure(camera_config)
 
-        server_socket = socket.socket()
-        server_socket.bind(('0.0.0.0', 8000))
-        server_socket.listen(0)
-
-        while True:
-            connection = server_socket.accept()[0].makefile('rb')
-            thread_connection = threading.Thread(target=self.send_to_connection, args=(connection,))
-            thread_connection.start()
-
-    def get_images_from_camera(self):
-
-        picam2 = Picamera2()
-
-        camera_config = picam2.create_still_configuration()
-        picam2.configure(camera_config)
-
-        picam2.start()
+        self.picam2.start()
         time.sleep(2)
 
-        time_regulator = TimeRegulator(50)
+        self.start()
 
-        while True:
+    def get_new_item_metadata_and_bytes(self):
 
-            self.last_image = picam2.capture_image("main")
-            time_regulator.wait_until_next_milestone()
-
-    def send_to_connection(self, connection):
-
-        time_regulator = TimeRegulator(50)
-
-        while True:
-
-            time_regulator.wait_until_next_milestone()
-
-            if self.last_image is None:
-                continue
-
-            self.send_image_to_connection(self.last_image, connection)
-
-    @staticmethod
-    def send_image_to_connection(image, connection):
+        image = self.picam2.capture_image("main")
 
         image_bytes = image.tobytes()
-        image_size = len(image_bytes)
-        connection.sendall(struct.pack('>I', image_size))
-        connection.sendall(image_bytes)
+
+        width, height = image.size
+        str_item_metadata = str(width) + "," + str(height)
+        item_metadata = bytes(str_item_metadata, 'utf-8')
+
+        return item_metadata, image_bytes
 
 
 # FIXME check
