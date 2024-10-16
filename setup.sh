@@ -20,8 +20,11 @@ sudo ./.venv/bin/pip3 install zmq==0.0.0
 sudo ./.venv/bin/pip3 install pybase64==1.4.0
 sudo ./.venv/bin/pip3 install psutil==6.0.0
 
-
 sudo apt update && sudo apt upgrade -y
 sudo apt install -y python3-picamera2
 
-# Camera on NON Virtual Env
+# Firewall
+sudo apt install -y ufw
+sudo ufw --force enable
+sudo ufw allow 8000
+sudo ufw allow 8080
