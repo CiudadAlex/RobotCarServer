@@ -35,7 +35,7 @@ class AbstractStreamServer(Thread):
         server_socket.listen(0)
 
         while True:
-            connection = server_socket.accept()[0].makefile('rb')
+            connection = server_socket.accept()[0].makefile('rwb')
             thread_sender = StreamSender(self, connection, self.check_send_interval_millis)
             thread_sender.start()
 
