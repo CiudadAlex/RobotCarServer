@@ -13,7 +13,6 @@ if __name__ == '__main__':
     keyboardCommander.start()
 
 
-# FIXME Camera server
 # FIXME Microphone server
 
 
