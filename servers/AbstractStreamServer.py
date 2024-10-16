@@ -3,16 +3,17 @@ import threading
 import socket
 import struct
 from utils.TimeRegulator import TimeRegulator
-import time
 
 
 class AbstractStreamServer(Thread):
 
-    def __init__(self, port, check_send_interval_millis):
+    def __init__(self, port, check_collect_interval_millis, check_send_interval_millis):
         super().__init__()
         self.port = port
+        self.check_collect_interval_millis = check_collect_interval_millis
         self.check_send_interval_millis = check_send_interval_millis
         self.last_item = None
+        self.last_item_id = 0
         self.lock = threading.Lock()
         self.start()
 
@@ -21,9 +22,14 @@ class AbstractStreamServer(Thread):
         with self.lock:
             return self.last_item
 
+    def set_last_item(self, item):
+
+        with self.lock:
+            self.last_item = item
+
     def run(self):
-        thread_camera = threading.Thread(target=self.get_images_from_camera)
-        thread_camera.start()
+        thread_collector = threading.Thread(target=self.collect_items)
+        thread_collector.start()
 
         server_socket = socket.socket()
         server_socket.bind(('0.0.0.0', self.port))
@@ -31,25 +37,25 @@ class AbstractStreamServer(Thread):
 
         while True:
             connection = server_socket.accept()[0].makefile('rb')
-            thread_connection = StreamSender(self, connection, self.check_send_interval_millis)
-            thread_connection.start()
+            thread_sender = StreamSender(self, connection, self.check_send_interval_millis)
+            thread_sender.start()
 
-    def get_images_from_camera(self):
+    def collect_items(self):
 
-        picam2 = Picamera2()
-
-        camera_config = picam2.create_still_configuration()
-        picam2.configure(camera_config)
-
-        picam2.start()
-        time.sleep(2)
-
-        time_regulator = TimeRegulator(50)
+        time_regulator = TimeRegulator(self.check_collect_interval_millis)
 
         while True:
+            item_id = self.last_item_id + 1
+            item_bytes = self.get_new_item_bytes()
 
-            self.last_image = picam2.capture_image("main")
+            item = Item(item_id, item_bytes)
+            self.set_last_item(item)
+            self.last_item_id = item_id
+
             time_regulator.wait_until_next_milestone()
+
+    def get_new_item_bytes(self):
+        raise NotImplementedError("The extending class should override the method 'get_new_item'")
 
 
 class StreamSender(Thread):
