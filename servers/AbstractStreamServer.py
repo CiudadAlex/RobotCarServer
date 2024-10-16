@@ -46,15 +46,15 @@ class AbstractStreamServer(Thread):
 
         while True:
             item_id = self.last_item_id + 1
-            item_bytes = self.get_new_item_bytes()
+            item_bytes, item_metadata = self.get_new_item_metadata_and_bytes()
 
-            item = Item(item_id, item_bytes)
+            item = Item(item_id, item_metadata, item_bytes)
             self.set_last_item(item)
             self.last_item_id = item_id
 
             time_regulator.wait_until_next_milestone()
 
-    def get_new_item_bytes(self):
+    def get_new_item_metadata_and_bytes(self):
         raise NotImplementedError("The extending class should override the method 'get_new_item'")
 
 
@@ -85,26 +85,25 @@ class StreamSender(Thread):
                 continue
 
             self.last_item_id = last_item.item_id
-            self.send_item_bytes_to_connection(last_item.item_bytes, self.connection)
+            self.send_item_bytes_to_connection(last_item.item_metadata, last_item.item_bytes, self.connection)
 
     @staticmethod
-    def send_item_bytes_to_connection(item_bytes, connection):
+    def send_item_bytes_to_connection(item_metadata, item_bytes, connection):
+
+        metadata_size = len(item_metadata)
+        connection.sendall(struct.pack('>I', metadata_size))
+        connection.sendall(item_metadata)
 
         item_size = len(item_bytes)
         connection.sendall(struct.pack('>I', item_size))
         connection.sendall(item_bytes)
 
-        # FIXME finish metadata
-
 
 class Item:
 
-    def __init__(self, item_id, item_bytes):
+    def __init__(self, item_id, item_metadata, item_bytes):
         self.item_id = item_id
+        self.item_metadata = item_metadata
         self.item_bytes = item_bytes
-
-# FIXME finish
-
-
 
 
