@@ -15,7 +15,6 @@ class AbstractStreamServer(Thread):
         self.last_item = None
         self.last_item_id = 0
         self.lock = threading.Lock()
-        self.start()
 
     def get_last_item(self):
 
