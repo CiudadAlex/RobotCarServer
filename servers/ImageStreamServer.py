@@ -9,7 +9,7 @@ class ImageStreamServer(AbstractStreamServer):
         super().__init__(port=8000, check_collect_interval_millis=50, check_send_interval_millis=50)
 
         self.picam2 = Picamera2()
-        camera_config = self.picam2.create_still_configuration()
+        camera_config = self.picam2.create_preview_configuration()
         self.picam2.configure(camera_config)
 
         self.picam2.start()
