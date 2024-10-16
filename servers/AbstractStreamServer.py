@@ -45,7 +45,7 @@ class AbstractStreamServer(Thread):
 
         while True:
             item_id = self.last_item_id + 1
-            item_bytes, item_metadata = self.get_new_item_metadata_and_bytes()
+            item_metadata, item_bytes = self.get_new_item_metadata_and_bytes()
 
             item = Item(item_id, item_metadata, item_bytes)
             self.set_last_item(item)
