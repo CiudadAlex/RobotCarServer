@@ -65,7 +65,6 @@ class StreamSender(Thread):
         self.stream_server = stream_server
         self.connection = connection
         self.check_send_interval_millis = check_send_interval_millis
-        self.start()
 
     def run(self):
 
