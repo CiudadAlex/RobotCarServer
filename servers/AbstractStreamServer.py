@@ -89,12 +89,16 @@ class StreamSender(Thread):
     def send_item_bytes_to_connection(item_metadata, item_bytes, connection):
 
         metadata_size = len(item_metadata)
-        connection.sendall(struct.pack('>I', metadata_size))
-        connection.sendall(item_metadata)
+        connection.write(struct.pack('>I', metadata_size))
+        connection.flush()
+        connection.write(item_metadata)
+        connection.flush()
 
         item_size = len(item_bytes)
-        connection.sendall(struct.pack('>I', item_size))
-        connection.sendall(item_bytes)
+        connection.write(struct.pack('>I', item_size))
+        connection.flush()
+        connection.write(item_bytes)
+        connection.flush()
 
 
 class Item:
