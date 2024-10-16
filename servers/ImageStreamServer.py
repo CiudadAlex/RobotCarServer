@@ -15,8 +15,6 @@ class ImageStreamServer(AbstractStreamServer):
         self.picam2.start()
         time.sleep(2)
 
-        self.start()
-
     def get_new_item_metadata_and_bytes(self):
 
         image = self.picam2.capture_image("main")
