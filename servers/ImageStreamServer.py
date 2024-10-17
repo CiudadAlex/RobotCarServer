@@ -21,22 +21,9 @@ class ImageStreamServer(AbstractStreamServer):
         start = time.time()
 
         image = self.picam2.capture_image("main")
-        rgb_image = image.convert('RGB')
+        image_bytes = image.tobytes()
 
-        buffered_rgb_image = io.BytesIO()
-        rgb_image.save(buffered_rgb_image, format="PNG", optimize=True)
-
-        # FIXME check not working
-        print(buffered_rgb_image)
-        print(buffered_rgb_image.getbuffer().nbytes)
-
-        image_bytes = buffered_rgb_image.getvalue()
-
-        # FIXME check not working
-        print(image_bytes)
-        print(len(image_bytes))
-
-        width, height = rgb_image.size
+        width, height = image.size
         str_item_metadata = str(width) + "," + str(height)
         item_metadata = bytes(str_item_metadata, 'utf-8')
 
