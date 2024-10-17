@@ -19,12 +19,13 @@ class ImageStreamServer(AbstractStreamServer):
     def get_new_item_metadata_and_bytes(self):
 
         image = self.picam2.capture_image("main")
+        rgb_image = image.convert('RGB')
 
-        buffered_image = io.BytesIO()
-        image.save(buffered_image, format="PNG", optimize=True)
-        image_bytes = buffered_image.read()
+        buffered_rgb_image = io.BytesIO()
+        rgb_image.save(buffered_rgb_image, format="PNG", optimize=True)
+        image_bytes = buffered_rgb_image.read()
 
-        width, height = image.size
+        width, height = rgb_image.size
         str_item_metadata = str(width) + "," + str(height)
         item_metadata = bytes(str_item_metadata, 'utf-8')
 
