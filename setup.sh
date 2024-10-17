@@ -19,6 +19,7 @@ sudo ./.venv/bin/pip3 install imutils==0.5.4
 sudo ./.venv/bin/pip3 install zmq==0.0.0
 sudo ./.venv/bin/pip3 install pybase64==1.4.0
 sudo ./.venv/bin/pip3 install psutil==6.0.0
+sudo ./.venv/bin/pip3 install SpeechRecognition==3.10.4
 
 sudo apt update && sudo apt upgrade -y
 sudo apt install -y python3-picamera2
