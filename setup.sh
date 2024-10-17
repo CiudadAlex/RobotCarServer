@@ -1,7 +1,7 @@
 python3 -m venv --system-site-packages .venv
 source .venv/bin/activate
 
-sudo apt install -y libhdf5-dev libhdf5-serial-dev libatlas-base-dev libjasper-dev libqt4-test
+sudo apt install -y libhdf5-dev libhdf5-serial-dev libatlas-base-dev libjasper-dev
 sudo apt install -y util-linux procps hostapd iproute2 iw haveged dnsmasq
 sudo apt install -y python3-smbus
 sudo apt install -y i2c-tools
