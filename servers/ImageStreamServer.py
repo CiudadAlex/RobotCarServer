@@ -1,7 +1,6 @@
-from servers.AbstractStreamServer import AbstractStreamServer, Item
+from servers.AbstractStreamServer import AbstractStreamServer
 from picamera2 import Picamera2
 import time
-import io
 
 
 class ImageStreamServer(AbstractStreamServer):
