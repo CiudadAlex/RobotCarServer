@@ -18,17 +18,12 @@ class ImageStreamServer(AbstractStreamServer):
 
     def get_new_item_metadata_and_bytes(self):
 
-        start = time.time()
-
         image = self.picam2.capture_image("main")
         image_bytes = image.tobytes()
 
         width, height = image.size
         str_item_metadata = str(width) + "," + str(height)
         item_metadata = bytes(str_item_metadata, 'utf-8')
-
-        end = time.time()
-        print(f"millis = {1000 * (end - start)}")
 
         return item_metadata, image_bytes
 

@@ -14,6 +14,4 @@ if __name__ == '__main__':
 
 
 # FIXME Microphone server
-# FIXME compress images in server
-
 
