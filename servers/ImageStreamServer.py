@@ -1,6 +1,7 @@
 from servers.AbstractStreamServer import AbstractStreamServer, Item
 from picamera2 import Picamera2
 import time
+import io
 
 
 class ImageStreamServer(AbstractStreamServer):
@@ -19,7 +20,9 @@ class ImageStreamServer(AbstractStreamServer):
 
         image = self.picam2.capture_image("main")
 
-        image_bytes = image.tobytes()
+        buffered_image = io.BytesIO()
+        image.save(buffered_image, format="JPG", optimize=True)
+        image_bytes = buffered_image.read()
 
         width, height = image.size
         str_item_metadata = str(width) + "," + str(height)
