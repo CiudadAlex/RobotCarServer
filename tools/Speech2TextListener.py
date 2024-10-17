@@ -1,15 +1,17 @@
 import speech_recognition as sr
+from threading import Thread
 
 
-class Speech2TextListener:
+class Speech2TextListener(Thread):
 
     def __init__(self, action_on_text):
+        super().__init__()
 
         # Initialize the recognizer
         self.r = sr.Recognizer()
         self.action_on_text = action_on_text
 
-    def start(self):
+    def run(self):
 
         # Loop infinitely for user to speak
 
@@ -21,7 +23,8 @@ class Speech2TextListener:
                 # use the microphone as source for input.
                 with sr.Microphone() as source2:
 
-                    # wait for a second to let the recognizer adjust the energy threshold based on the surrounding noise level
+                    # wait for a second to let the recognizer adjust the energy
+                    # threshold based on the surrounding noise level
                     self.r.adjust_for_ambient_noise(source2, duration=0.2)
 
                     # listens for the user's input
