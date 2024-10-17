@@ -26,5 +26,6 @@ sudo apt install -y python3-picamera2
 # Firewall
 sudo apt install -y ufw
 sudo ufw --force enable
+sudo ufw allow 22
 sudo ufw allow 8000
 sudo ufw allow 8080
