@@ -25,6 +25,11 @@ class ImageStreamServer(AbstractStreamServer):
         rgb_image.save(buffered_rgb_image, format="PNG", optimize=True)
         image_bytes = buffered_rgb_image.read()
 
+        # FIXME check not working
+        print(buffered_rgb_image)
+        print(image_bytes)
+        print(len(image_bytes))
+
         width, height = rgb_image.size
         str_item_metadata = str(width) + "," + str(height)
         item_metadata = bytes(str_item_metadata, 'utf-8')
