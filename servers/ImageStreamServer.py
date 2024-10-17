@@ -21,7 +21,7 @@ class ImageStreamServer(AbstractStreamServer):
         image = self.picam2.capture_image("main")
 
         buffered_image = io.BytesIO()
-        image.save(buffered_image, format="JPG", optimize=True)
+        image.save(buffered_image, format="PNG", optimize=True)
         image_bytes = buffered_image.read()
 
         width, height = image.size
