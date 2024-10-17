@@ -14,11 +14,11 @@ if __name__ == '__main__2':
     keyboardCommander.start()
 
 
-def speak_text(my_text):
-    print("You said: ", my_text)
+def action_on_text(text):
+    print("You said: ", text)
 
 
-speech_2_text_listener = Speech2TextListener(speak_text)
+speech_2_text_listener = Speech2TextListener(action_on_text)
 speech_2_text_listener.start()
 
 

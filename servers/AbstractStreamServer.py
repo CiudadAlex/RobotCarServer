@@ -44,12 +44,14 @@ class AbstractStreamServer(Thread):
         time_regulator = TimeRegulator(self.check_collect_interval_millis)
 
         while True:
-            item_id = self.last_item_id + 1
+
             item_metadata, item_bytes = self.get_new_item_metadata_and_bytes()
 
-            item = Item(item_id, item_metadata, item_bytes)
-            self.set_last_item(item)
-            self.last_item_id = item_id
+            if item_bytes is not None:
+                item_id = self.last_item_id + 1
+                item = Item(item_id, item_metadata, item_bytes)
+                self.set_last_item(item)
+                self.last_item_id = item_id
 
             time_regulator.wait_until_next_milestone()
 
