@@ -10,17 +10,21 @@ class TextStreamServer(AbstractStreamServer):
         self.speech_2_text_listener = Speech2TextListener(self.action_on_text)
         self.speech_2_text_listener.start()
 
-    @staticmethod
-    def action_on_text(text):
+        self.last_text = None
+
+    def action_on_text(self, text):
         print("You said: ", text)
+        self.last_text = text
 
     def get_new_item_metadata_and_bytes(self):
 
-        image = self.picam2.capture_image("main")
-        image_bytes = image.tobytes()
+        if self.last_text is None:
+            return None, None
 
-        width, height = image.size
-        str_item_metadata = str(width) + "," + str(height)
-        item_metadata = bytes(str_item_metadata, 'utf-8')
+        text_bytes = bytes(self.last_text, 'utf-8')
+        item_metadata = bytes("Text", 'utf-8')
 
-        return item_metadata, image_bytes
+        self.last_text = None
+
+        return item_metadata, text_bytes
+
