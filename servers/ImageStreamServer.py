@@ -23,10 +23,14 @@ class ImageStreamServer(AbstractStreamServer):
 
         buffered_rgb_image = io.BytesIO()
         rgb_image.save(buffered_rgb_image, format="PNG", optimize=True)
-        image_bytes = buffered_rgb_image.read()
 
         # FIXME check not working
         print(buffered_rgb_image)
+        print(buffered_rgb_image.getbuffer().nbytes)
+
+        image_bytes = buffered_rgb_image.read()
+
+        # FIXME check not working
         print(image_bytes)
         print(len(image_bytes))
 
