@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, request
-from managers.LedStripManager import LedStripManager
+from commanders.Commander import Commander
 
 app = Flask(__name__)
 
@@ -7,6 +7,10 @@ app = Flask(__name__)
 @app.route('/led/<mode>', methods=['POST'])
 def set_led(mode):
     print(f"Setting led mode: {mode}")
-    return '', 204
+    success = Commander.execute(f"led {mode}")
 
-# FIXME refactor-merge with KeyboardCommander
+    if success:
+        return '', 204
+    else:
+        return f"Command {mode} not found", 400
+

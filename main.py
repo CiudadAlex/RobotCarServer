@@ -26,6 +26,8 @@ speech_2_text_listener.start()
 # text_stream_server = TextStreamServer()
 # text_stream_server.start()
 
+# import CommandServer
+
 # FIXME Microphone server
 
 # FIXME REST server on port 8080 with LED commands

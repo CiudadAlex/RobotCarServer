@@ -34,10 +34,12 @@ class Commander:
 
         if command not in Commander.get_instance().command_map.keys():
             Commander.help_commands()
+            return False
         else:
             func = Commander.get_instance().command_map[command]
             func()
             print("Executed")
+            return True
 
     @staticmethod
     def help_commands():
