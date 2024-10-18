@@ -6,6 +6,8 @@ sudo apt install -y util-linux procps hostapd iproute2 iw haveged dnsmasq
 sudo apt install -y python3-smbus
 sudo apt install -y i2c-tools
 sudo apt install -y libfreetype6-dev libjpeg-dev build-essential
+sudo apt install -y python3-pyaudio
+sudo apt install -y flac
 
 sudo ./.venv/bin/pip3 install RPi.GPIO==0.7.1
 sudo ./.venv/bin/pip3 install adafruit-pca9685==1.0.1
@@ -20,7 +22,6 @@ sudo ./.venv/bin/pip3 install zmq==0.0.0
 sudo ./.venv/bin/pip3 install pybase64==1.4.0
 sudo ./.venv/bin/pip3 install psutil==6.0.0
 sudo ./.venv/bin/pip3 install SpeechRecognition==3.10.4
-sudo ./.venv/bin/pip3 install PyAudio==0.2.14
 
 sudo apt update && sudo apt upgrade -y
 sudo apt install -y python3-picamera2
