@@ -5,7 +5,7 @@ from tools.Speech2TextListener import Speech2TextListener
 class TextStreamServer(AbstractStreamServer):
 
     def __init__(self):
-        super().__init__(port=8000, check_collect_interval_millis=500, check_send_interval_millis=500)
+        super().__init__(port=7999, check_collect_interval_millis=500, check_send_interval_millis=500)
 
         self.speech_2_text_listener = Speech2TextListener(self.action_on_text)
         self.speech_2_text_listener.start()
