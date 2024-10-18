@@ -27,4 +27,12 @@ speech_2_text_listener.start()
 # text_stream_server.start()
 
 # FIXME Microphone server
+
 # FIXME REST server on port 8080 with LED commands
+# https://auth0.com/blog/developing-restful-apis-with-python-and-flask/
+
+# FIXME try (arecord -l)
+# /usr/share/alsa/alsa.conf
+# defaults.ctl.card 2
+# defaults.pcm.card 2
+
