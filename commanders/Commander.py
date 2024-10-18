@@ -31,9 +31,13 @@ class Commander:
 
     @staticmethod
     def execute(command):
-        func = Commander.get_instance().command_map[command]
-        func()
-        print("Executed")
+
+        if command not in Commander.get_instance().command_map.keys():
+            Commander.help_commands()
+        else:
+            func = Commander.get_instance().command_map[command]
+            func()
+            print("Executed")
 
     @staticmethod
     def help_commands():
