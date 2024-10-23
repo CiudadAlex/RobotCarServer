@@ -1,6 +1,5 @@
 import pyaudio
 import wave
-import os
 
 
 # The following code comes from markjay4k as referenced below
@@ -8,7 +7,7 @@ form_1 = pyaudio.paInt16
 chans=1
 samp_rate = 44100
 chunk = 4096
-record_secs = 1     # record time
+record_secs = 10     # record time
 dev_index = 2
 wav_output_filename = 'test1.wav'
 
@@ -21,7 +20,7 @@ print("recording")
 frames=[]
 
 for ii in range(0,int((samp_rate/chunk)*record_secs)):
-    data=stream.read(chunk,exception_on_overflow = False)
+    data=stream.read(chunk,exception_on_overflow=False)
     frames.append(data)
 
 print("finished recording")
@@ -39,5 +38,4 @@ wavefile.setframerate(samp_rate)
 wavefile.writeframes(b''.join(frames))
 wavefile.close()
 
-# plays the audio file
-os.system("aplay test1.wav")
+print("finished")
