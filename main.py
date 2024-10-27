@@ -28,7 +28,7 @@ speech_2_text_processor.start()
 
 # import CommandServer
 
-# FIXME local speech detection finetuning
+# FIXME local speech detection finetuning (maybe process in PC + AudioStreamServer)
 # FIXME test Microphone server
 # FIXME test server LED commands
 
