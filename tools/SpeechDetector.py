@@ -13,11 +13,12 @@ class SpeechDetector:
     def detect_voice(self, audio_chunk):
 
         # Divide in segments of 30 ms (mandatory for VAD)
-        frame_duration = 30  # ms
+        frame_duration = 30 / 1000  # secs
         sample_rate = 16000
-        samples_per_frame = int(sample_rate * frame_duration / 1000)
+        bytes_per_sample = 2
+        piece_size = int(bytes_per_sample * sample_rate * frame_duration)
 
-        list_frames = self.divide_bytearray(audio_chunk, samples_per_frame)
+        list_frames = self.divide_bytearray(audio_chunk, piece_size)
 
         # Evaluate each frame to detect speech
         is_speech_detected = False

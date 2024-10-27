@@ -9,13 +9,12 @@ import speech_recognition as sr
 
 class Speech2TextProcessor(Thread):
 
-    def __init__(self, interval_record_secs, function_with_recognized_text, use_speech_detection=True,
+    def __init__(self, interval_record_secs, function_with_recognized_text,
                  should_store_audio_file=False):
         super().__init__()
 
         self.interval_record_secs = interval_record_secs
         self.function_with_recognized_text = function_with_recognized_text
-        self.use_speech_detection = use_speech_detection
         self.should_store_audio_file = should_store_audio_file
 
         # Initialize PyAudio
@@ -50,20 +49,9 @@ class Speech2TextProcessor(Thread):
         except KeyboardInterrupt:
             print("Stopping audio capture...")
 
-    def local_detection_of_speech(self, audio_chunk):
-
-        if self.use_speech_detection:
-            is_speech_detected = self.speech_detector.detect_voice(audio_chunk)
-            print(f"Speech detected: {is_speech_detected}")
-
-            if not is_speech_detected:
-                raise sr.UnknownValueError
-
     def process_audio_chunk(self, audio_chunk):
 
         try:
-
-            self.local_detection_of_speech(audio_chunk)
 
             audio_data = sr.AudioData(audio_chunk, self.rate, self.p.get_sample_size(self.audio_format))
 
@@ -119,7 +107,7 @@ class Speech2TextProcessor(Thread):
             print("recording")
             frames = []
 
-            for ii in range(0, int((self.rate/self.chunk_size)*self.interval_record_secs)):
+            for ii in range(0, int((self.rate / self.chunk_size) * self.interval_record_secs)):
                 data = self.stream.read(self.chunk_size, exception_on_overflow=False)
                 frames.append(data)
 
@@ -128,7 +116,12 @@ class Speech2TextProcessor(Thread):
             if self.should_store_audio_file:
                 self.store_audio_file(audio_chunk)
 
-            self.queue_of_chunks.put(audio_chunk)
+            is_speech_detected = self.speech_detector.detect_voice(audio_chunk)
+
+            if is_speech_detected:
+                print("Speech detected!!")
+                self.queue_of_chunks.put(audio_chunk)
+
             print("finished recording")
 
         self.stream.stop_stream()
