@@ -1,5 +1,5 @@
 from servers.AbstractStreamServer import AbstractStreamServer
-from tools.Speech2TextListener import Speech2TextListener
+from tools.Speech2TextProcessor import Speech2TextProcessor
 
 
 class TextStreamServer(AbstractStreamServer):
@@ -7,8 +7,8 @@ class TextStreamServer(AbstractStreamServer):
     def __init__(self):
         super().__init__(port=7999, check_collect_interval_millis=500, check_send_interval_millis=500)
 
-        self.speech_2_text_listener = Speech2TextListener(self.action_on_text)
-        self.speech_2_text_listener.start()
+        self.speech_2_text_processor = Speech2TextProcessor(interval_record_secs=5, function_with_recognized_text=self.action_on_text)
+        self.speech_2_text_processor.start()
 
         self.last_text = None
 
