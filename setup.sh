@@ -24,6 +24,7 @@ sudo ./.venv/bin/pip3 install psutil==6.0.0
 sudo ./.venv/bin/pip3 install SpeechRecognition==3.10.4
 sudo ./.venv/bin/pip3 install Flask==3.0.3
 sudo ./.venv/bin/pip3 install webrtcvad==2.0.10
+sudo ./.venv/bin/pip3 install pydub==0.25.1
 
 # Camera
 sudo apt update && sudo apt upgrade -y

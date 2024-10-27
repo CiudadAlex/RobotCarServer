@@ -1,4 +1,7 @@
 import webrtcvad
+from pydub import AudioSegment
+import numpy as np
+import io
 
 
 class SpeechDetector:
@@ -6,7 +9,16 @@ class SpeechDetector:
     def __init__(self, aggressiveness=3):
         self.vad = webrtcvad.Vad(aggressiveness)
 
-    def detect_voice(self, audio_pcm):
+    @staticmethod
+    def convert_to_pcm(audio_chunk):
+        audio = AudioSegment.from_file(io.BytesIO(audio_chunk))
+        audio = audio.set_channels(1)  # Mono
+        audio = audio.set_frame_rate(16000)  # 16 kHz
+        return np.array(audio.get_array_of_samples())
+
+    def detect_voice(self, audio_chunk):
+
+        audio_pcm = self.convert_to_pcm(audio_chunk)
 
         # Divide in segments of 30 ms (mandatory for VAD)
         frame_duration = 30  # ms
