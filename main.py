@@ -1,6 +1,6 @@
 from commanders.KeyboardCommander import KeyboardCommander
 from servers.ImageStreamServer import ImageStreamServer
-from servers.TextStreamServer import TextStreamServer
+# from servers.TextStreamServer import TextStreamServer
 from tools.Speech2TextProcessor import Speech2TextProcessor
 
 
