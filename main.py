@@ -19,9 +19,11 @@ def action_on_text(text):
     print("You said: ", text)
 
 
-record_secs = 10     # record time
-speech_2_text_processor = Speech2TextProcessor()
-speech_2_text_processor.store_and_recognize_audio(record_secs, action_on_text)
+speech_2_text_processor = Speech2TextProcessor(interval_record_secs=5, function_with_recognized_text=action_on_text)
+speech_2_text_processor.start()
+import time
+time.sleep(30)
+speech_2_text_processor.stop()
 
 
 # text_stream_server = TextStreamServer()

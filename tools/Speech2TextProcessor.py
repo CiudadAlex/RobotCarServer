@@ -1,12 +1,19 @@
+from threading import Thread
+import threading
 import pyaudio
 import wave
 import queue
 import speech_recognition as sr
 
 
-class Speech2TextProcessor:
+class Speech2TextProcessor(Thread):
 
-    def __init__(self):
+    def __init__(self, interval_record_secs, function_with_recognized_text, should_store_audio_file=False):
+        super().__init__()
+
+        self.interval_record_secs = interval_record_secs
+        self.function_with_recognized_text = function_with_recognized_text
+        self.should_store_audio_file = should_store_audio_file
 
         # Initialize PyAudio
         self.p = pyaudio.PyAudio()
@@ -24,7 +31,21 @@ class Speech2TextProcessor:
         self.queue_of_chunks = queue.Queue()
         self.recognized_text = None
 
-    def process_audio_chunk(self, audio_chunk, function_with_recognized_text):
+        self.stream = None
+        self.active = False
+
+    def process_audio_queue(self):
+
+        try:
+            while True:
+                audio_chunk = self.queue_of_chunks.get()
+                self.process_audio_chunk(audio_chunk)
+                self.queue_of_chunks.task_done()
+
+        except KeyboardInterrupt:
+            print("Stopping audio capture...")
+
+    def process_audio_chunk(self, audio_chunk):
         audio_data = sr.AudioData(audio_chunk, self.rate, self.p.get_sample_size(self.audio_format))
 
         try:
@@ -39,7 +60,7 @@ class Speech2TextProcessor:
         except sr.UnknownValueError:
             print("Google Speech Recognition could not understand audio")
             if self.recognized_text is not None:
-                function_with_recognized_text(self.recognized_text)
+                self.function_with_recognized_text(self.recognized_text)
 
                 print("Back waiting for commands...")
 
@@ -64,29 +85,35 @@ class Speech2TextProcessor:
         wavefile.writeframes(audio_chunk)
         wavefile.close()
 
-    def store_and_recognize_audio(self, record_secs, function_with_recognized_text, store_audio_file=False):
+    def run(self):
+
+        # Start recognizing audio in a separate thread
+        recognizing_thread = threading.Thread(target=self.process_audio_queue)
+        recognizing_thread.start()
 
         # setup audio input stream
-        stream = self.p.open(format=self.audio_format, rate=self.rate, channels=self.chans, input_device_index=self.dev_index,
-                             input=True, frames_per_buffer=self.chunk_size)
-        print("recording")
-        frames = []
+        self.stream = self.p.open(format=self.audio_format, rate=self.rate, channels=self.chans,
+                                  input_device_index=self.dev_index, input=True, frames_per_buffer=self.chunk_size)
 
-        for ii in range(0, int((self.rate/self.chunk_size)*record_secs)):
-            data = stream.read(self.chunk_size, exception_on_overflow=False)
-            frames.append(data)
+        while self.active:
+            print("recording")
+            frames = []
 
-        print("finished recording")
+            for ii in range(0, int((self.rate/self.chunk_size)*self.interval_record_secs)):
+                data = self.stream.read(self.chunk_size, exception_on_overflow=False)
+                frames.append(data)
 
-        stream.stop_stream()
-        stream.close()
-        self.p.terminate()
+            audio_chunk = b''.join(frames)
 
-        audio_chunk = b''.join(frames)
+            if self.should_store_audio_file:
+                self.store_audio_file(audio_chunk)
 
-        if store_audio_file:
-            self.store_audio_file(audio_chunk)
+            self.queue_of_chunks.put(audio_chunk)
+            print("finished recording")
 
-        self.process_audio_chunk(audio_chunk, function_with_recognized_text)
-        print("finished")
+        self.stream.stop_stream()
+        self.stream.close()
+        print("Speech2TextProcessor finished")
 
+    def stop(self):
+        self.active = False
