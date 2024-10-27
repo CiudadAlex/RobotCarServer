@@ -1,4 +1,5 @@
 from threading import Thread
+from tools.SpeechDetector import SpeechDetector
 import threading
 import pyaudio
 import wave
@@ -8,11 +9,13 @@ import speech_recognition as sr
 
 class Speech2TextProcessor(Thread):
 
-    def __init__(self, interval_record_secs, function_with_recognized_text, should_store_audio_file=False):
+    def __init__(self, interval_record_secs, function_with_recognized_text, use_speech_detection=True,
+                 should_store_audio_file=False):
         super().__init__()
 
         self.interval_record_secs = interval_record_secs
         self.function_with_recognized_text = function_with_recognized_text
+        self.use_speech_detection = use_speech_detection
         self.should_store_audio_file = should_store_audio_file
 
         # Initialize PyAudio
@@ -20,6 +23,8 @@ class Speech2TextProcessor(Thread):
 
         # Initialize recognizer
         self.recognizer = sr.Recognizer()
+
+        self.speech_detector = SpeechDetector()
 
         # Variables
         self.chans = 1
@@ -45,10 +50,23 @@ class Speech2TextProcessor(Thread):
         except KeyboardInterrupt:
             print("Stopping audio capture...")
 
+    def local_detection_of_speech(self, audio_chunk):
+
+        if self.use_speech_detection:
+            is_speech_detected = self.speech_detector.detect_voice(audio_chunk)
+            print(f"Speech detected: {is_speech_detected}")
+
+            if not is_speech_detected:
+                raise sr.UnknownValueError
+
     def process_audio_chunk(self, audio_chunk):
-        audio_data = sr.AudioData(audio_chunk, self.rate, self.p.get_sample_size(self.audio_format))
 
         try:
+
+            self.local_detection_of_speech(audio_chunk)
+
+            audio_data = sr.AudioData(audio_chunk, self.rate, self.p.get_sample_size(self.audio_format))
+
             text = self.recognizer.recognize_google(audio_data)
             print(f"Recognized Text: {text}")
 
