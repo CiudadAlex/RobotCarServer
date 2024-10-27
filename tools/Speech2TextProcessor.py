@@ -10,12 +10,13 @@ import speech_recognition as sr
 class Speech2TextProcessor(Thread):
 
     def __init__(self, interval_record_secs, function_with_recognized_text,
-                 should_store_audio_file=False):
+                 should_store_audio_file=False, local_speech_detection=False):
         super().__init__()
 
         self.interval_record_secs = interval_record_secs
         self.function_with_recognized_text = function_with_recognized_text
         self.should_store_audio_file = should_store_audio_file
+        self.local_speech_detection = local_speech_detection
 
         # Initialize PyAudio
         self.p = pyaudio.PyAudio()
@@ -116,10 +117,12 @@ class Speech2TextProcessor(Thread):
             if self.should_store_audio_file:
                 self.store_audio_file(audio_chunk)
 
-            is_speech_detected = self.speech_detector.detect_voice(audio_chunk)
+            is_speech_detected = True
+
+            if self.local_speech_detection:
+                is_speech_detected = self.speech_detector.detect_voice(audio_chunk)
 
             if is_speech_detected:
-                print("Speech detected!!")
                 self.queue_of_chunks.put(audio_chunk)
 
             print("finished recording")
