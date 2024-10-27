@@ -26,6 +26,9 @@ speech_2_text_processor.start()
 # text_stream_server = TextStreamServer()
 # text_stream_server.start()
 
+# audio_stream_server = AudioStreamServer()
+# audio_stream_server.start()
+
 # import CommandServer
 
 # FIXME local speech detection finetuning (maybe process in PC + AudioStreamServer)

@@ -40,3 +40,4 @@ sudo ufw allow 22
 sudo ufw allow 8000
 sudo ufw allow 8080
 sudo ufw allow 7999
+sudo ufw allow 7998
