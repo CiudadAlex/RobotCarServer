@@ -16,16 +16,11 @@ if __name__ == '__main__2':
 
 
 def action_on_text(text):
-    print("You said: ", text)
+    print("######## You said: ", text)
 
 
 speech_2_text_processor = Speech2TextProcessor(interval_record_secs=5, function_with_recognized_text=action_on_text)
 speech_2_text_processor.start()
-import time
-print("######## 0")
-time.sleep(30)
-print("######## 30")
-speech_2_text_processor.stop()
 
 
 # text_stream_server = TextStreamServer()
