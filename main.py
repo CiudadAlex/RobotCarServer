@@ -1,7 +1,7 @@
 from commanders.KeyboardCommander import KeyboardCommander
 from servers.ImageStreamServer import ImageStreamServer
 from servers.TextStreamServer import TextStreamServer
-from tools.Speech2TextListener import Speech2TextListener
+from tools.Speech2TextProcessor import Speech2TextProcessor
 
 
 if __name__ == '__main__2':
@@ -19,8 +19,9 @@ def action_on_text(text):
     print("You said: ", text)
 
 
-speech_2_text_listener = Speech2TextListener(action_on_text)
-speech_2_text_listener.start()
+record_secs = 10     # record time
+speech_2_text_processor = Speech2TextProcessor()
+speech_2_text_processor.store_and_recognize_audio(record_secs, action_on_text)
 
 
 # text_stream_server = TextStreamServer()
@@ -29,12 +30,6 @@ speech_2_text_listener.start()
 # import CommandServer
 
 # FIXME Microphone server
+# FIXME test server LED commands
 
-# FIXME REST server on port 8080 with LED commands
-# https://auth0.com/blog/developing-restful-apis-with-python-and-flask/
-
-# FIXME try (arecord -l)
-# /usr/share/alsa/alsa.conf
-# defaults.ctl.card 2
-# defaults.pcm.card 2
 

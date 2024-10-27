@@ -4,7 +4,7 @@ import queue
 import speech_recognition as sr
 
 
-class AudioCommanderProcessor:
+class Speech2TextProcessor:
 
     def __init__(self):
 
@@ -17,10 +17,9 @@ class AudioCommanderProcessor:
         # Variables
         self.chans = 1
         self.dev_index = 2
-        # self.rate = 44100
         self.rate = 16000
         self.audio_format = pyaudio.paInt16
-        self.chunk_size = self.rate  # 1 seconds
+        self.chunk_size = self.rate  # 1 second
 
         self.queue_of_chunks = queue.Queue()
         self.recognized_text = None
@@ -65,7 +64,7 @@ class AudioCommanderProcessor:
         wavefile.writeframes(audio_chunk)
         wavefile.close()
 
-    def store_and_recognize_audio(self, record_secs, function_with_recognized_text):
+    def store_and_recognize_audio(self, record_secs, function_with_recognized_text, store_audio_file=False):
 
         # setup audio input stream
         stream = self.p.open(format=self.audio_format, rate=self.rate, channels=self.chans, input_device_index=self.dev_index,
@@ -85,15 +84,9 @@ class AudioCommanderProcessor:
 
         audio_chunk = b''.join(frames)
 
-        self.store_audio_file(audio_chunk)
+        if store_audio_file:
+            self.store_audio_file(audio_chunk)
+
         self.process_audio_chunk(audio_chunk, function_with_recognized_text)
         print("finished")
 
-
-def action_on_text(text):
-    print("You said: ", text)
-
-
-record_secs = 10     # record time
-audio_commander_processor = AudioCommanderProcessor()
-audio_commander_processor.store_and_recognize_audio(record_secs, action_on_text)
