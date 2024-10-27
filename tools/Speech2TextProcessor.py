@@ -87,6 +87,8 @@ class Speech2TextProcessor(Thread):
 
     def run(self):
 
+        self.active = True
+
         # Start recognizing audio in a separate thread
         recognizing_thread = threading.Thread(target=self.process_audio_queue)
         recognizing_thread.start()
