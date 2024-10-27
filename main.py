@@ -28,6 +28,7 @@ speech_2_text_processor.start()
 
 # import CommandServer
 
+# FIXME local speech detection
 # FIXME test Microphone server
 # FIXME test server LED commands
 
