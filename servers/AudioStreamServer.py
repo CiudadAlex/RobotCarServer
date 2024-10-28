@@ -23,6 +23,8 @@ class AudioStreamServer(AbstractStreamServer):
 
     def get_new_item_metadata_and_bytes(self):
 
+        print("get_new_item_metadata_and_bytes")
+
         frames = []
 
         for ii in range(0, int((self.rate / self.chunk_size) * self.interval_record_secs)):
@@ -31,6 +33,9 @@ class AudioStreamServer(AbstractStreamServer):
 
         audio_chunk = b''.join(frames)
         item_metadata = bytes('Audio', 'utf-8')
+
+        print(f"len(frames) = {len(frames)}")
+        print(f"len(audio_chunk) = {len(audio_chunk)}")
 
         return item_metadata, audio_chunk
 
