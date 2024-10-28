@@ -23,7 +23,8 @@ class AudioStreamServer(AbstractStreamServer):
 
     def get_new_item_metadata_and_bytes(self):
 
-        audio_chunk = self.stream.read(self.chunk_size * self.interval_record_secs, exception_on_overflow=False)
+        read_size = int(self.chunk_size * self.interval_record_secs)
+        audio_chunk = self.stream.read(read_size, exception_on_overflow=False)
         item_metadata = bytes('Audio', 'utf-8')
 
         return item_metadata, audio_chunk
