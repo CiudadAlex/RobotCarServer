@@ -1,6 +1,6 @@
 from commanders.KeyboardCommander import KeyboardCommander
 from servers.ImageStreamServer import ImageStreamServer
-from servers.TextStreamServer import TextStreamServer
+from servers.AudioStreamServer import AudioStreamServer
 
 
 if __name__ == '__main__2':
@@ -18,16 +18,12 @@ def action_on_text(text):
     print("######## You said: ", text)
 
 
-text_stream_server = TextStreamServer()
-text_stream_server.start()
-
-# audio_stream_server = AudioStreamServer()
-# audio_stream_server.start()
+audio_stream_server = AudioStreamServer()
+audio_stream_server.start()
 
 # import CommandServer
 
-# FIXME local speech detection finetuning (maybe process in PC + AudioStreamServer)
-# FIXME test Microphone server
+# FIXME test AudioStreamServer
 # FIXME test server LED commands
 
 
