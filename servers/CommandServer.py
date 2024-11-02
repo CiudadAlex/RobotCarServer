@@ -15,5 +15,5 @@ def set_led(mode):
         return f"Command {mode} not found", 400
 
 
-app.run()
+app.run(host='0.0.0.0', port=8080)
 
