@@ -20,6 +20,6 @@ if __name__ == '__main__2':
 
 from servers import CommandServer
 
-# FIXME test server LED commands
+# FIXME refactor
 
 
