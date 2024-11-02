@@ -18,11 +18,7 @@ if __name__ == '__main__2':
     audio_stream_server.start()
 
 
-def action_on_text(text):
-    print("######## You said: ", text)
-
-
-# import CommandServer
+from servers import CommandServer
 
 # FIXME test server LED commands
 
