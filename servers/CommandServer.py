@@ -14,3 +14,6 @@ def set_led(mode):
     else:
         return f"Command {mode} not found", 400
 
+
+app.run()
+
