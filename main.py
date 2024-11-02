@@ -13,17 +13,17 @@ if __name__ == '__main__2':
     keyboard_commander = KeyboardCommander()
     keyboard_commander.start()
 
+    print("######## Start AudioStreamServer")
+    audio_stream_server = AudioStreamServer()
+    audio_stream_server.start()
+
 
 def action_on_text(text):
     print("######## You said: ", text)
 
 
-audio_stream_server = AudioStreamServer()
-audio_stream_server.start()
-
 # import CommandServer
 
-# FIXME test AudioStreamServer
 # FIXME test server LED commands
 
 
