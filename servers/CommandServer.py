@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, request
 from commanders.Commander import Commander
+import threading
 
 app = Flask(__name__)
 
@@ -15,5 +16,6 @@ def set_led(mode):
         return f"Command {mode} not found", 400
 
 
-app.run(host='0.0.0.0', port=8088)
+def run_server():
+    threading.Thread(target=lambda: app.run(host='0.0.0.0', port=8088, debug=False, use_reloader=False)).start()
 
