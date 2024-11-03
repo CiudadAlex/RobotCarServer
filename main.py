@@ -1,9 +1,10 @@
 from commanders.KeyboardCommander import KeyboardCommander
 from servers.ImageStreamServer import ImageStreamServer
 from servers.AudioStreamServer import AudioStreamServer
+from servers import CommandServer
 
 
-if __name__ == '__main__2':
+if __name__ == '__main__':
 
     print("######## Start ImageStreamServer")
     image_stream_server = ImageStreamServer()
@@ -16,10 +17,5 @@ if __name__ == '__main__2':
     print("######## Start AudioStreamServer")
     audio_stream_server = AudioStreamServer()
     audio_stream_server.start()
-
-
-from servers import CommandServer
-
-# FIXME refactor
 
 
