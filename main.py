@@ -4,7 +4,7 @@ from servers.AudioStreamServer import AudioStreamServer
 from servers import CommandServer
 
 
-if __name__ == '__main__':
+if __name__ == '__main__2':
 
     print("######## Start CommandServer")
     CommandServer.run_server()
@@ -20,4 +20,9 @@ if __name__ == '__main__':
     print("######## Start KeyboardCommander")
     keyboard_commander = KeyboardCommander()
     keyboard_commander.start()
+
+
+from actuators.CameraTilt import CameraTilt
+camera_tilt = CameraTilt()
+camera_tilt.home()
 
