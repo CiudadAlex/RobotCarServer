@@ -35,7 +35,7 @@ class Motor:
         GPIO.setup(Motor.Motor_B_Pin1, GPIO.OUT)
         GPIO.setup(Motor.Motor_B_Pin2, GPIO.OUT)
 
-        self.motor_stop()
+        self.stop()
 
         try:
             self.pwm_A = GPIO.PWM(Motor.Motor_A_EN, 1000)
@@ -45,7 +45,7 @@ class Motor:
             traceback.print_exc(file=sys.stdout)
 
     @staticmethod
-    def motor_stop():
+    def stop():
         GPIO.output(Motor.Motor_A_Pin1, GPIO.LOW)
         GPIO.output(Motor.Motor_A_Pin2, GPIO.LOW)
         GPIO.output(Motor.Motor_B_Pin1, GPIO.LOW)
@@ -77,43 +77,49 @@ class Motor:
     def motor_side_right(self, run, direction, speed):
         self.motor_side(run, direction, speed, Motor.Motor_A_Pin1, Motor.Motor_A_Pin2, Motor.Motor_A_EN)
 
-    def move(self, speed, direction, turn, radius=0.6):   # 0 < radius <= 1
+    def move(self, speed_left, speed_right):
 
-        if direction == 'forward':
-            if turn == 'right':
-                self.motor_side_left(run=False, direction=Motor.left_backward, speed=int(speed*radius))
-                self.motor_side_right(run=True, direction=Motor.right_forward, speed=speed)
-            elif turn == 'left':
-                self.motor_side_left(run=True, direction=Motor.left_forward, speed=speed)
-                self.motor_side_right(run=False, direction=Motor.right_backward, speed=int(speed*radius))
-            else:
-                self.motor_side_left(run=True, direction=Motor.left_forward, speed=speed)
-                self.motor_side_right(run=True, direction=Motor.right_forward, speed=speed)
-        elif direction == 'backward':
-            if turn == 'right':
-                self.motor_side_left(run=False, direction=Motor.left_forward, speed=int(speed*radius))
-                self.motor_side_right(run=True, direction=Motor.right_backward, speed=speed)
-            elif turn == 'left':
-                self.motor_side_left(run=True, direction=Motor.left_backward, speed=speed)
-                self.motor_side_right(run=False, direction=Motor.right_forward, speed=int(speed*radius))
-            else:
-                self.motor_side_left(run=True, direction=Motor.left_backward, speed=speed)
-                self.motor_side_right(run=True, direction=Motor.right_backward, speed=speed)
-        elif direction == 'no':
-            if turn == 'right':
-                self.motor_side_left(run=True, direction=Motor.left_backward, speed=speed)
-                self.motor_side_right(run=True, direction=Motor.right_forward, speed=speed)
-            elif turn == 'left':
-                self.motor_side_left(run=True, direction=Motor.left_forward, speed=speed)
-                self.motor_side_right(run=True, direction=Motor.right_backward, speed=speed)
-            else:
-                self.motor_stop()
+        if speed_left >= 0:
+            left_direction = Motor.left_forward
         else:
-            pass
+            left_direction = Motor.left_backward
+
+        self.motor_side_left(run=True, direction=left_direction, speed=int(abs(speed_left)))
+
+        if speed_right >= 0:
+            right_direction = Motor.right_forward
+        else:
+            right_direction = Motor.right_backward
+
+        self.motor_side_right(run=True, direction=right_direction, speed=int(abs(speed_right)))
+
+    def forward(self, speed):
+        self.move(speed, speed)
+
+    def backward(self, speed):
+        self.move(-speed, -speed)
+
+    def turn_forward_left(self, speed, turn_power):
+        self.move(speed * (1 - turn_power), speed)
+
+    def turn_forward_right(self, speed, turn_power):
+        self.move(speed, speed * (1 - turn_power))
+
+    def turn_backward_left(self, speed, turn_power):
+        self.move(-speed * (1 - turn_power), -speed)
+
+    def turn_backward_right(self, speed, turn_power):
+        self.move(-speed, -speed * (1 - turn_power))
+
+    def turn_left(self, speed):
+        self.move(-speed, speed)
+
+    def turn_right(self, speed):
+        self.move(speed, -speed)
 
     def destroy(self):
 
-        self.motor_stop()
+        self.stop()
 
         # Release resource
         GPIO.cleanup()

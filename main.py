@@ -22,7 +22,20 @@ if __name__ == '__main__2':
     keyboard_commander.start()
 
 
+# FIXME test servo and motor
+
 from actuators.CameraTilt import CameraTilt
 camera_tilt = CameraTilt()
 camera_tilt.home()
+
+import time
+time.sleep(10)
+
+print("END______________________")
+
+'''
+from actuators.Motor import Motor
+motor = Motor()
+motor.forward(100)
+'''
 
