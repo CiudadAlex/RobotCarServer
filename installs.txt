@@ -1,0 +1,2 @@
+>> sudo raspi-config
+And then navigate to "Interface Options" and then enable i2c
