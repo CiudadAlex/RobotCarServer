@@ -29,14 +29,17 @@ camera_tilt = CameraTilt()
 camera_tilt.home()
 '''
 
+import time
 
 from actuators.Motor import Motor
 motor = Motor()
-# motor.forward(100)
+motor.forward(50)
+
+time.sleep(5)
 motor.stop()
 
 
-import time
+
 time.sleep(10)
 
 print("END______________________")
