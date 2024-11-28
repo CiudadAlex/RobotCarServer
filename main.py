@@ -35,7 +35,7 @@ from actuators.Motor import Motor
 motor = Motor()
 motor.forward(100)
 
-time.sleep(5)
+time.sleep(20)
 motor.stop()
 
 
