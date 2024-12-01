@@ -11,8 +11,8 @@ class Motor:
     Motor_A_EN = 4
     Motor_B_EN = 17
 
-    Motor_A_Pin1 = 14
-    Motor_A_Pin2 = 15
+    Motor_A_Pin1 = 26
+    Motor_A_Pin2 = 21
     Motor_B_Pin1 = 27
     Motor_B_Pin2 = 18
 
