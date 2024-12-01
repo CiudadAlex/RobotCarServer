@@ -58,13 +58,13 @@ print(sys.argv)
 
 if len(sys.argv) > 1:
 
-    Motor.Motor_A_EN = sys.argv[1]
-    Motor.Motor_A_Pin1 = sys.argv[2]
-    Motor.Motor_A_Pin2 = sys.argv[3]
+    Motor.Motor_A_EN = int(sys.argv[1])
+    Motor.Motor_A_Pin1 = int(sys.argv[2])
+    Motor.Motor_A_Pin2 = int(sys.argv[3])
 
-    Motor.Motor_B_EN = sys.argv[4]
-    Motor.Motor_B_Pin1 = sys.argv[5]
-    Motor.Motor_B_Pin2 = sys.argv[6]
+    Motor.Motor_B_EN = int(sys.argv[4])
+    Motor.Motor_B_Pin1 = int(sys.argv[5])
+    Motor.Motor_B_Pin2 = int(sys.argv[6])
 
 
 motor = Motor()
