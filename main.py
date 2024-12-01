@@ -71,7 +71,7 @@ motor = Motor()
 # motor.forward(100)
 
 motor.motor_side_left(run=True, direction=0, speed=100)
-motor.motor_side_right(run=True, direction=0, speed=100)
+# motor.motor_side_right(run=True, direction=0, speed=100)
 
 time.sleep(10)
 motor.stop()
