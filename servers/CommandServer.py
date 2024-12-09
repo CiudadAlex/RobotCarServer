@@ -17,7 +17,7 @@ def set_led(mode):
 
 
 @app.route('/move/<mode>', methods=['POST'])
-def set_led(mode):
+def set_move(mode):
     print(f"Setting move mode: {mode}")
     success = Commander.execute(f"move {mode}")
 
