@@ -1,4 +1,5 @@
 from managers.LedStripManager import LedStripManager
+from actuators.Motor import Motor
 import os
 
 
@@ -14,6 +15,7 @@ class Commander:
 
     def __init__(self):
         self.ledStripManager = LedStripManager()
+        self.motor = Motor()
 
         self.command_map = {
             "led stop": self.ledStripManager.stop,
@@ -22,6 +24,17 @@ class Commander:
             "led rainbow": self.ledStripManager.rainbow,
             "led breathe": self.ledStripManager.breathe,
             "led rainbow_flag": self.ledStripManager.rainbow_flag,
+            "move forward": self.motor.forward,
+
+            "move backward": self.motor.backward,
+            "move turn_forward_left": self.motor.turn_forward_left,
+            "move turn_forward_right": self.motor.turn_forward_right,
+            "move turn_backward_left": self.motor.turn_backward_left,
+            "move turn_backward_right": self.motor.turn_backward_right,
+            "move turn_left": self.motor.turn_left,
+            "move turn_right": self.motor.turn_right,
+            "move stop": self.motor.stop,
+
             "exit": self.exit
         }
 

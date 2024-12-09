@@ -100,28 +100,28 @@ class Motor:
 
             self.motor_side_right(run=True, direction=right_direction, speed=int(abs(speed_right)))
 
-    def forward(self, speed):
+    def forward(self, speed=100):
         self.move(speed, speed)
 
-    def backward(self, speed):
+    def backward(self, speed=100):
         self.move(-speed, -speed)
 
-    def turn_forward_left(self, speed):
+    def turn_forward_left(self, speed=100):
         self.move(0, speed)
 
-    def turn_forward_right(self, speed):
+    def turn_forward_right(self, speed=100):
         self.move(speed, 0)
 
-    def turn_backward_left(self, speed):
+    def turn_backward_left(self, speed=100):
         self.move(0, -speed)
 
-    def turn_backward_right(self, speed):
+    def turn_backward_right(self, speed=100):
         self.move(-speed, 0)
 
-    def turn_left(self, speed):
+    def turn_left(self, speed=100):
         self.move(-speed, speed)
 
-    def turn_right(self, speed):
+    def turn_right(self, speed=100):
         self.move(speed, -speed)
 
     def destroy(self):
