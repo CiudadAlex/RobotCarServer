@@ -35,13 +35,9 @@ print("######## up")
 camera_tilt.up()
 
 time.sleep(3)
-print("######## up")
-camera_tilt.up()
+print("######## down")
+camera_tilt.down()
 
 time.sleep(3)
-print("######## up")
-camera_tilt.up()
-
-time.sleep(3)
-print("######## up")
-camera_tilt.up()
+print("######## down")
+camera_tilt.down()
