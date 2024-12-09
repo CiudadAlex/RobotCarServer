@@ -38,22 +38,22 @@ motor.stop()
 
 while True:
     print("Waiting command")
-    input = input()
+    input_keyboard = input()
 
-    if input == "w":
+    if input_keyboard == "w":
         motor.forward(100)
-    elif input == "s":
+    elif input_keyboard == "s":
         motor.backward(100)
-    elif input == "a":
+    elif input_keyboard == "a":
         motor.turn_forward_left(100, 0.5)
-    elif input == "d":
+    elif input_keyboard == "d":
         motor.turn_forward_right(100, 0.5)
-    elif input == "e":
+    elif input_keyboard == "e":
         motor.stop()
-    elif input == "q":
+    elif input_keyboard == "q":
         break
 
-    print(f"Command '{input}' executed")
+    print(f"Command '{input_keyboard}' executed")
 
 
 print("END______________________")
