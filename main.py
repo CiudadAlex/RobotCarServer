@@ -4,7 +4,7 @@ from servers.AudioStreamServer import AudioStreamServer
 from servers import CommandServer
 
 
-if __name__ == '__main__2':
+if __name__ == '__main__':
 
     print("######## Start CommandServer")
     CommandServer.run_server()
@@ -21,13 +21,3 @@ if __name__ == '__main__2':
     keyboard_commander = KeyboardCommander()
     keyboard_commander.start()
 
-
-# FIXME test obstacle detector
-
-from sensors.ObstacleDetector import ObstacleDetector
-import time
-
-for i in range(10):
-    dist = ObstacleDetector.check_distance()
-    print(f"dist = {dist}")
-    time.sleep(3)
