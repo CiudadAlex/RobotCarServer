@@ -1,5 +1,6 @@
 from managers.LedStripManager import LedStripManager
 from actuators.Motor import Motor
+from actuators.CameraTilt import CameraTilt
 import os
 
 
@@ -16,6 +17,7 @@ class Commander:
     def __init__(self):
         self.ledStripManager = LedStripManager()
         self.motor = Motor()
+        self.camera_tilt = CameraTilt()
 
         self.command_map = {
             "led stop": self.ledStripManager.stop,
@@ -34,6 +36,10 @@ class Commander:
             "move turn_left": self.motor.turn_left,
             "move turn_right": self.motor.turn_right,
             "move stop": self.motor.stop,
+
+            "look up": self.camera_tilt.up,
+            "look down": self.camera_tilt.down,
+            "look home": self.camera_tilt.home,
 
             "exit": self.exit
         }
