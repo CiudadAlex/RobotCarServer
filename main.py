@@ -22,7 +22,6 @@ if __name__ == '__main__2':
     keyboard_commander.start()
 
 
-# FIXME test servo
 # FIXME obstacle detector
 
 print("######## Start KeyboardCommander")
