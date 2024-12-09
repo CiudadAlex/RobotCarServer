@@ -6,7 +6,7 @@ class CameraTilt:
     """
     change this form 1 to -1 to reverse servos
     """
-    look_direction = 1
+    look_direction = -1
 
     look_max = 500
     look_min = 100
