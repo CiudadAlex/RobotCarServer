@@ -80,6 +80,9 @@ class Motor:
 
     def move(self, speed_left, speed_right):
 
+        print(f"speed_left  {speed_left}")
+        print(f"speed_right {speed_right}")
+
         if speed_left >= 0:
             left_direction = Motor.left_forward
         else:
