@@ -53,7 +53,8 @@ class Motor:
         GPIO.output(Motor.Motor_A_EN, GPIO.LOW)
         GPIO.output(Motor.Motor_B_EN, GPIO.LOW)
 
-    def motor_side(self, pwm, run, direction, speed, pin1, pin2, en):
+    @staticmethod
+    def motor_side(pwm, run, direction, speed, pin1, pin2, en):
 
         if run is False:
             GPIO.output(pin1, GPIO.LOW)
@@ -72,10 +73,10 @@ class Motor:
                 pwm.ChangeDutyCycle(speed)
 
     def motor_side_left(self, run, direction, speed):
-        self.motor_side(run, self.pwm_B, direction, speed, Motor.Motor_B_Pin1, Motor.Motor_B_Pin2, Motor.Motor_B_EN)
+        self.motor_side(self.pwm_B, run, direction, speed, Motor.Motor_B_Pin1, Motor.Motor_B_Pin2, Motor.Motor_B_EN)
 
     def motor_side_right(self, run, direction, speed):
-        self.motor_side(run, self.pwm_A, direction, speed, Motor.Motor_A_Pin1, Motor.Motor_A_Pin2, Motor.Motor_A_EN)
+        self.motor_side(self.pwm_A, run, direction, speed, Motor.Motor_A_Pin1, Motor.Motor_A_Pin2, Motor.Motor_A_EN)
 
     def move(self, speed_left, speed_right):
 
