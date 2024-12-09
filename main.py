@@ -23,66 +23,37 @@ if __name__ == '__main__2':
 
 
 # FIXME test servo and motor
+# FIXME obstacle detector
+
 '''
 from actuators.CameraTilt import CameraTilt
 camera_tilt = CameraTilt()
 camera_tilt.home()
 '''
 
-import sys
-import time
 from actuators.Motor import Motor
 
-print(sys.argv)
-
-'''
-    Motor_A_EN = 4
-    Motor_A_Pin1 = 26
-    Motor_A_Pin2 = 21
-    
-    Motor_B_EN = 17
-    Motor_B_Pin1 = 27
-    Motor_B_Pin2 = 18
-    
-    -------------------------------
-    
-    Motor_A_EN = 4
-    Motor_A_Pin1 = 14
-    Motor_A_Pin2 = 15
-    
-    Motor_B_EN = 17
-    Motor_B_Pin1 = 27
-    Motor_B_Pin2 = 18
-
-'''
-'''
-Motor.Motor_A_EN = 4
-Motor.Motor_A_Pin1 = 14
-Motor.Motor_A_Pin2 = 15
-
-Motor.Motor_B_EN = 17
-Motor.Motor_B_Pin1 = 27
-Motor.Motor_B_Pin2 = 18
-
-
-def print_motor_values():
-    print(f"{Motor.Motor_A_EN} {Motor.Motor_A_Pin1} {Motor.Motor_A_Pin2} || {Motor.Motor_B_EN} {Motor.Motor_B_Pin1} {Motor.Motor_B_Pin2}")
-
-
-for i in range(30):
-    Motor.Motor_B_EN = i
-    print_motor_values()
-    motor = Motor()
-    motor.forward(100)
-    time.sleep(1)
-    motor.stop()
-
-print("END______________________")
-'''
-
 motor = Motor()
-motor.forward(100)
-time.sleep(5)
 motor.stop()
+
+while True:
+    print("Waiting command")
+    input = input()
+
+    if input == "w":
+        motor.forward(100)
+    elif input == "s":
+        motor.backward(100)
+    elif input == "a":
+        motor.turn_forward_left(100, 0.5)
+    elif input == "d":
+        motor.turn_forward_right(100, 0.5)
+    elif input == "e":
+        motor.stop()
+    elif input == "q":
+        break
+
+    print(f"Command '{input}' executed")
+
 
 print("END______________________")
