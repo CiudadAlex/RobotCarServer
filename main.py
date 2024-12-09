@@ -31,8 +31,17 @@ camera_tilt = CameraTilt()
 camera_tilt.home()
 
 time.sleep(3)
+print("######## up")
 camera_tilt.up()
+
 time.sleep(3)
+print("######## up")
 camera_tilt.up()
 
+time.sleep(3)
+print("######## up")
+camera_tilt.up()
 
+time.sleep(3)
+print("######## up")
+camera_tilt.up()
