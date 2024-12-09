@@ -56,24 +56,27 @@ print(sys.argv)
 
 '''
 
-if len(sys.argv) > 1:
+Motor.Motor_A_EN = 4
+Motor.Motor_A_Pin1 = 14
+Motor.Motor_A_Pin2 = 15
 
-    Motor.Motor_A_EN = int(sys.argv[1])
-    Motor.Motor_A_Pin1 = int(sys.argv[2])
-    Motor.Motor_A_Pin2 = int(sys.argv[3])
+Motor.Motor_B_EN = 17
+Motor.Motor_B_Pin1 = 27
+Motor.Motor_B_Pin2 = 18
 
-    Motor.Motor_B_EN = int(sys.argv[4])
-    Motor.Motor_B_Pin1 = int(sys.argv[5])
-    Motor.Motor_B_Pin2 = int(sys.argv[6])
+
+def print_motor_values():
+    print(f"{Motor.Motor_A_EN} {Motor.Motor_A_Pin1} {Motor.Motor_A_Pin2} || {Motor.Motor_B_EN} {Motor.Motor_B_Pin1} {Motor.Motor_B_Pin2}")
 
 
 motor = Motor()
-# motor.forward(100)
 
-motor.motor_side_left(run=True, direction=0, speed=100)
-motor.motor_side_right(run=True, direction=0, speed=100)
+for i in range(30):
+    Motor.Motor_B_EN = i
+    motor.forward(100)
+    time.sleep(1)
 
-time.sleep(5)
+
 motor.stop()
 
 print("END______________________")
