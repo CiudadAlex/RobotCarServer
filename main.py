@@ -22,9 +22,12 @@ if __name__ == '__main__2':
     keyboard_commander.start()
 
 
-# FIXME obstacle detector
+# FIXME test obstacle detector
 
-print("######## Start KeyboardCommander")
-keyboard_commander = KeyboardCommander()
-keyboard_commander.start()
+from sensors.ObstacleDetector import ObstacleDetector
+import time
 
+for i in range(10):
+    dist = ObstacleDetector.check_distance()
+    print(f"dist = {dist}")
+    time.sleep(3)
