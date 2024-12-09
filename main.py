@@ -25,13 +25,14 @@ if __name__ == '__main__2':
 # FIXME test servo and motor
 # FIXME obstacle detector
 
-'''
+import time
 from actuators.CameraTilt import CameraTilt
 camera_tilt = CameraTilt()
 camera_tilt.home()
-'''
 
-print("######## Start KeyboardCommander")
-keyboard_commander = KeyboardCommander()
-keyboard_commander.start()
+time.sleep(3)
+camera_tilt.up()
+time.sleep(3)
+camera_tilt.up()
+
 
