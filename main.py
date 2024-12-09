@@ -69,15 +69,13 @@ def print_motor_values():
     print(f"{Motor.Motor_A_EN} {Motor.Motor_A_Pin1} {Motor.Motor_A_Pin2} || {Motor.Motor_B_EN} {Motor.Motor_B_Pin1} {Motor.Motor_B_Pin2}")
 
 
-motor = Motor()
-
 for i in range(30):
     Motor.Motor_B_EN = i
+    print_motor_values()
+    motor = Motor()
     motor.forward(100)
     time.sleep(1)
-
-
-motor.stop()
+    motor.stop()
 
 print("END______________________")
 
