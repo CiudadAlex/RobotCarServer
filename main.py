@@ -55,7 +55,7 @@ print(sys.argv)
     Motor_B_Pin2 = 18
 
 '''
-
+'''
 Motor.Motor_A_EN = 4
 Motor.Motor_A_Pin1 = 14
 Motor.Motor_A_Pin2 = 15
@@ -78,5 +78,11 @@ for i in range(30):
     motor.stop()
 
 print("END______________________")
+'''
 
+motor = Motor()
+motor.forward(100)
+time.sleep(5)
+motor.stop()
 
+print("END______________________")

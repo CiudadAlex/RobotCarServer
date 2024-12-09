@@ -53,7 +53,7 @@ class Motor:
         GPIO.output(Motor.Motor_A_EN, GPIO.LOW)
         GPIO.output(Motor.Motor_B_EN, GPIO.LOW)
 
-    def motor_side(self, run, direction, speed, pin1, pin2, en):
+    def motor_side(self, pwm, run, direction, speed, pin1, pin2, en):
 
         if run is False:
             GPIO.output(pin1, GPIO.LOW)
@@ -63,19 +63,19 @@ class Motor:
             if direction == Motor.Dir_backward:
                 GPIO.output(pin1, GPIO.HIGH)
                 GPIO.output(pin2, GPIO.LOW)
-                self.pwm_B.start(100)
-                self.pwm_B.ChangeDutyCycle(speed)
+                pwm.start(100)
+                pwm.ChangeDutyCycle(speed)
             elif direction == Motor.Dir_forward:
                 GPIO.output(pin1, GPIO.LOW)
                 GPIO.output(pin2, GPIO.HIGH)
-                self.pwm_B.start(0)
-                self.pwm_B.ChangeDutyCycle(speed)
+                pwm.start(0)
+                pwm.ChangeDutyCycle(speed)
 
     def motor_side_left(self, run, direction, speed):
-        self.motor_side(run, direction, speed, Motor.Motor_B_Pin1, Motor.Motor_B_Pin2, Motor.Motor_B_EN)
+        self.motor_side(run, self.pwm_B, direction, speed, Motor.Motor_B_Pin1, Motor.Motor_B_Pin2, Motor.Motor_B_EN)
 
     def motor_side_right(self, run, direction, speed):
-        self.motor_side(run, direction, speed, Motor.Motor_A_Pin1, Motor.Motor_A_Pin2, Motor.Motor_A_EN)
+        self.motor_side(run, self.pwm_A, direction, speed, Motor.Motor_A_Pin1, Motor.Motor_A_Pin2, Motor.Motor_A_EN)
 
     def move(self, speed_left, speed_right):
 
