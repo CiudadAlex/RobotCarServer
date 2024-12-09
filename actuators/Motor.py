@@ -80,22 +80,25 @@ class Motor:
 
     def move(self, speed_left, speed_right):
 
-        print(f"speed_left  {speed_left}")
-        print(f"speed_right {speed_right}")
-
-        if speed_left >= 0:
-            left_direction = Motor.left_forward
+        if speed_left == 0:
+            self.motor_side_left(run=False, direction=-1, speed=-1)
         else:
-            left_direction = Motor.left_backward
+            if speed_left > 0:
+                left_direction = Motor.left_forward
+            else:
+                left_direction = Motor.left_backward
 
-        self.motor_side_left(run=True, direction=left_direction, speed=int(abs(speed_left)))
+            self.motor_side_left(run=True, direction=left_direction, speed=int(abs(speed_left)))
 
-        if speed_right >= 0:
-            right_direction = Motor.right_forward
+        if speed_right == 0:
+            self.motor_side_right(run=False, direction=-1, speed=-1)
         else:
-            right_direction = Motor.right_backward
+            if speed_right > 0:
+                right_direction = Motor.right_forward
+            else:
+                right_direction = Motor.right_backward
 
-        self.motor_side_right(run=True, direction=right_direction, speed=int(abs(speed_right)))
+            self.motor_side_right(run=True, direction=right_direction, speed=int(abs(speed_right)))
 
     def forward(self, speed):
         self.move(speed, speed)
@@ -103,17 +106,17 @@ class Motor:
     def backward(self, speed):
         self.move(-speed, -speed)
 
-    def turn_forward_left(self, speed, turn_power):
-        self.move(speed * (1 - turn_power), speed)
+    def turn_forward_left(self, speed):
+        self.move(0, speed)
 
-    def turn_forward_right(self, speed, turn_power):
-        self.move(speed, speed * (1 - turn_power))
+    def turn_forward_right(self, speed):
+        self.move(speed, 0)
 
-    def turn_backward_left(self, speed, turn_power):
-        self.move(-speed * (1 - turn_power), -speed)
+    def turn_backward_left(self, speed):
+        self.move(0, -speed)
 
-    def turn_backward_right(self, speed, turn_power):
-        self.move(-speed, -speed * (1 - turn_power))
+    def turn_backward_right(self, speed):
+        self.move(-speed, 0)
 
     def turn_left(self, speed):
         self.move(-speed, speed)

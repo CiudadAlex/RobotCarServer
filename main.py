@@ -44,10 +44,17 @@ while True:
         motor.forward(100)
     elif input_keyboard == "s":
         motor.backward(100)
+
     elif input_keyboard == "a":
-        motor.turn_forward_left(100, 1)
+        motor.turn_forward_left(100)
     elif input_keyboard == "d":
-        motor.turn_forward_right(100, 1)
+        motor.turn_forward_right(100)
+
+    elif input_keyboard == "n":
+        motor.turn_left(100)
+    elif input_keyboard == "m":
+        motor.turn_right(100)
+
     elif input_keyboard == "e":
         motor.stop()
     elif input_keyboard == "q":
