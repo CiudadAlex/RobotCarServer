@@ -30,7 +30,7 @@ def set_move(mode):
 @app.route('/look/<mode>', methods=['POST'])
 def set_look(mode):
     print(f"Setting look mode: {mode}")
-    success = Commander.execute(f"move {mode}")
+    success = Commander.execute(f"look {mode}")
 
     if success:
         return '', 204
