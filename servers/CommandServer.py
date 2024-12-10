@@ -38,6 +38,17 @@ def set_look(mode):
         return f"Command {mode} not found", 400
 
 
+@app.route('/listen/<mode>', methods=['POST'])
+def set_listen(mode):
+    print(f"Setting listen mode: {mode}")
+    success = Commander.execute(f"listen {mode}")
+
+    if success:
+        return '', 204
+    else:
+        return f"Command {mode} not found", 400
+
+
 def run_server():
     threading.Thread(target=lambda: app.run(host='0.0.0.0', port=8088, debug=False, use_reloader=False)).start()
 

@@ -1,6 +1,7 @@
 from managers.LedStripManager import LedStripManager
 from actuators.Motor import Motor
 from actuators.CameraTilt import CameraTilt
+from servers.AudioStreamServer import AudioStreamServer
 import os
 
 
@@ -41,12 +42,23 @@ class Commander:
             "look down": self.camera_tilt.down,
             "look home": self.camera_tilt.home,
 
+            "listen on": self.listen_on,
+            "listen off": self.listen_off,
+
             "exit": self.exit
         }
 
     @staticmethod
     def exit():
         os._exit(0)
+
+    @staticmethod
+    def listen_on():
+        AudioStreamServer.listening = True
+
+    @staticmethod
+    def listen_off():
+        AudioStreamServer.listening = False
 
     @staticmethod
     def execute(command):
