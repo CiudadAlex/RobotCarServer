@@ -2,9 +2,14 @@ from commanders.KeyboardCommander import KeyboardCommander
 from servers.ImageStreamServer import ImageStreamServer
 from servers.AudioStreamServer import AudioStreamServer
 from servers import CommandServer
+from commanders.Commander import Commander
 
 
 if __name__ == '__main__':
+
+    Commander.execute("move stop")
+    Commander.execute("led stop")
+    Commander.execute("look home")
 
     print("######## Start CommandServer")
     CommandServer.run_server()
