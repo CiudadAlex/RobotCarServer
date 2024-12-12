@@ -52,10 +52,14 @@ def set_listen(mode):
 
 @app.route('/say', methods=['POST'])
 def set_say():
-    print(f"Say command")
+
     data = request.get_json()
-    Text2SpeechEngine.get_instance().say(data.text)
-    # FIXME off listening
+    text_to_say = data.text
+    print(f"Say command: {text_to_say}")
+
+    Commander.listen_off()
+    Text2SpeechEngine.get_instance().say(text_to_say)
+    Commander.listen_on()
 
     return '', 204
 
