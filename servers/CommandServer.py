@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, request
 from commanders.Commander import Commander
+from tools.Text2SpeechEngine import Text2SpeechEngine
 import threading
 
 app = Flask(__name__)
@@ -47,6 +48,16 @@ def set_listen(mode):
         return '', 204
     else:
         return f"Command {mode} not found", 400
+
+
+@app.route('/say', methods=['POST'])
+def set_say():
+    print(f"Say command")
+    data = request.get_json()
+    Text2SpeechEngine.get_instance().say(data.text)
+    # FIXME off listening
+
+    return '', 204
 
 
 def run_server():
