@@ -1,7 +1,7 @@
 from managers.LedStripManager import LedStripManager
 from actuators.Motor import Motor
 from actuators.CameraTilt import CameraTilt
-from servers.AudioStreamServer import AudioStreamServer
+# FIXME uncomment from servers.AudioStreamServer import AudioStreamServer
 import os
 
 
@@ -56,11 +56,13 @@ class Commander:
 
     @staticmethod
     def listen_on():
-        AudioStreamServer.listening = True
+        pass
+        # FIXME uncomment AudioStreamServer.listening = True
 
     @staticmethod
     def listen_off():
-        AudioStreamServer.listening = False
+        pass
+        # FIXME uncomment AudioStreamServer.listening = False
 
     @staticmethod
     def execute(command):
