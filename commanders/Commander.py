@@ -4,6 +4,15 @@ from actuators.CameraTilt import CameraTilt
 # FIXME uncomment from servers.AudioStreamServer import AudioStreamServer
 import os
 
+'''
+Traceback (most recent call last):
+  File "/home/pi/RobotCarServer/main.py", line 1, in <module>
+    from commanders.KeyboardCommander import KeyboardCommander
+  File "/home/pi/RobotCarServer/commanders/KeyboardCommander.py", line 1, in <module>
+    from commanders.Commander import Commander
+ImportError: cannot import name 'Commander' from 'commanders.Commander' (/home/pi/RobotCarServer/commanders/Commander.py)
+'''
+
 
 class Commander:
 
