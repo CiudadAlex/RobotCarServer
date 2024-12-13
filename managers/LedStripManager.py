@@ -45,3 +45,11 @@ class LedStripManager(Thread):
         self.func = self.ledStripChoreographer.rainbow_flag
         self.ledStripChoreographer.stop()
 
+    def red(self):
+        self.func = self.ledStripChoreographer.red
+        self.ledStripChoreographer.stop()
+
+    def fading_red(self):
+        self.func = self.ledStripChoreographer.fading_red
+        self.ledStripChoreographer.stop()
+

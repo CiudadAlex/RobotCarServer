@@ -96,3 +96,12 @@ class LedStripChoreographer:
     def black(self):
         self.strip.set_color(LedStrip.BLACK)
 
+    def red(self):
+        self.strip.set_color(LedStrip.RED)
+
+    def fading_color(self, r, g, b):
+        self.strip.color_transition(r, g, b, 0, 0, 0, 20, wait=0.05)
+
+    def fading_red(self):
+        self.fading_color(255, 0, 0)
+

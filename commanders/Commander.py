@@ -27,8 +27,10 @@ class Commander:
             "led rainbow": self.ledStripManager.rainbow,
             "led breathe": self.ledStripManager.breathe,
             "led rainbow_flag": self.ledStripManager.rainbow_flag,
-            "move forward": self.motor.forward,
+            "led red": self.ledStripManager.red,
+            "led fading_red": self.ledStripManager.fading_red,
 
+            "move forward": self.motor.forward,
             "move backward": self.motor.backward,
             "move turn_forward_left": self.motor.turn_forward_left,
             "move turn_forward_right": self.motor.turn_forward_right,
