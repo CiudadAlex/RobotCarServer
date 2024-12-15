@@ -49,5 +49,5 @@ cp ./RobotCarServer/stop_motor.sh .
 sudo chmod 777 ./start.sh
 sudo chmod 777 ./stop_motor.sh
 
-cat /etc/rc.local | sed 's/fi/fi\n/home/pi/stop_motor.sh/g' > /etc/rc.local.test.txt
+sudo cat /etc/rc.local | sed 's/fi/fi\n\/home\/pi\/stop_motor.sh/g' > /etc/rc.local.test.txt
 
