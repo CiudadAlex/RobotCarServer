@@ -1,3 +1,3 @@
 sudo git pull
 clear
-sudo ../.venv/bin/python3 main.py
+sudo /home/pi/.venv/bin/python3 main.py

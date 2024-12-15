@@ -1,2 +1,11 @@
+# Navigate to /home/pi, clone the gitHub repo and execute setup
+
+>> cd /home/pi
+>> sudo git clone https://github.com/CiudadAlex/RobotCarServer.git
+>> sudo sh ./RobotCarServer/setup.sh
+
+# Execute
+
 >> sudo raspi-config
-And then navigate to "Interface Options" and then enable i2c
+
+# And then navigate to "Interface Options" and then enable i2c

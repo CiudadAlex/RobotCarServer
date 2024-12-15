@@ -42,3 +42,12 @@ sudo ufw allow 8000
 sudo ufw allow 8088
 sudo ufw allow 7999
 sudo ufw allow 7998
+
+# Startup
+cp ./RobotCarServer/start.sh .
+cp ./RobotCarServer/stop_motor.sh .
+sudo chmod 777 ./start.sh
+sudo chmod 777 ./stop_motor.sh
+
+cat /etc/rc.local | sed 's/fi/fi\n/home/pi/stop_motor.sh/g' > /etc/rc.local.test.txt
+
