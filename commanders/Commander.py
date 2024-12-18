@@ -1,7 +1,8 @@
 from managers.LedStripManager import LedStripManager
 from actuators.Motor import Motor
 from actuators.CameraTilt import CameraTilt
-# FIXME uncomment from servers.AudioStreamServer import AudioStreamServer
+# FIXME uncomment
+from servers.AudioStreamServer import AudioStreamServer
 import os
 
 '''
