@@ -67,12 +67,14 @@ class Commander:
     @staticmethod
     def listen_on():
         pass
-        # FIXME uncomment AudioStreamServer.listening = True
+        # FIXME uncomment
+        AudioStreamServer.listening = True
 
     @staticmethod
     def listen_off():
         pass
-        # FIXME uncomment AudioStreamServer.listening = False
+        # FIXME uncomment
+        AudioStreamServer.listening = False
 
     @staticmethod
     def execute(command):
