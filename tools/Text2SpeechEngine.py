@@ -8,7 +8,7 @@ class Text2SpeechEngine:
     @staticmethod
     def get_instance():
         if Text2SpeechEngine.instance is None:
-            Text2SpeechEngine.instance = Text2SpeechEngine()
+            Text2SpeechEngine.instance = Text2SpeechEngine("en")
         return Text2SpeechEngine.instance
 
     def __init__(self, language):
