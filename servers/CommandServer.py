@@ -56,8 +56,7 @@ def set_listen(mode):
 def set_say():
 
     data = request.get_json()
-    print(f"Say command json: {data}")
-    text_to_say = data.text
+    text_to_say = data
     print(f"Say command: {text_to_say}")
 
     Commander.listen_off()
