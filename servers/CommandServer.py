@@ -2,6 +2,8 @@ from flask import Flask, jsonify, request
 from commanders.Commander import Commander
 from tools.Text2SpeechEngine import Text2SpeechEngine
 import threading
+import sys
+import traceback
 
 app = Flask(__name__)
 
@@ -58,7 +60,12 @@ def set_say():
     print(f"Say command: {text_to_say}")
 
     Commander.listen_off()
-    Text2SpeechEngine.get_instance().say(text_to_say)
+
+    try:
+        Text2SpeechEngine.get_instance().say(text_to_say)
+    except Exception:
+        traceback.print_exc(file=sys.stdout)
+
     Commander.listen_on()
 
     return '', 204
