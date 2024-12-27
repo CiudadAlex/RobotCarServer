@@ -75,6 +75,18 @@ class Commander:
             return True
 
     @staticmethod
+    def execute_move_stop():
+        Commander.execute("move stop")
+
+    @staticmethod
+    def execute_led_stop():
+        Commander.execute("led stop")
+
+    @staticmethod
+    def execute_look_home():
+        Commander.execute("look home")
+
+    @staticmethod
     def help_commands():
         print("Command list:")
 

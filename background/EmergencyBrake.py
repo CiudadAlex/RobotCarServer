@@ -1,5 +1,5 @@
 from sensors.ObstacleDetector import ObstacleDetector
-from actuators.Motor import Motor
+from commanders.Commander import Commander
 from threading import Thread
 
 
@@ -8,7 +8,6 @@ class EmergencyBrake(Thread):
     def __init__(self):
         super().__init__()
         self.active = True
-        self.motor = Motor()
 
     def run(self):
 
@@ -16,5 +15,5 @@ class EmergencyBrake(Thread):
 
             distance = ObstacleDetector.check_distance()
             if distance < 0.15:
-                self.motor.stop()
+                Commander.execute_move_stop()
                 print("BRAKE!!!!!")

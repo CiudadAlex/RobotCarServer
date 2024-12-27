@@ -8,9 +8,9 @@ from background.EmergencyBrake import EmergencyBrake
 
 if __name__ == '__main__':
 
-    Commander.execute("move stop")
-    Commander.execute("led stop")
-    Commander.execute("look home")
+    Commander.execute_move_stop()
+    Commander.execute_led_stop()
+    Commander.execute_look_home()
 
     print("######## Start CommandServer")
     CommandServer.run_server()
