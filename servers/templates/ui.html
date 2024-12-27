@@ -51,7 +51,7 @@
     <script>
         function callRestAPI(button) {
             fetch(`http://192.168.0.19:8088/move/${button}`, {
-                method: 'GET'
+                method: 'POST'
             })
             .then(response => response.json())
             .then(data => {
