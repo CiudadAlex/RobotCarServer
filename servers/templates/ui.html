@@ -50,7 +50,7 @@
 
     <script>
         function callRestAPI(button) {
-            fetch(`http://192.168.0.19/move/${button}`, {
+            fetch(`http://192.168.0.19:8088/move/${button}`, {
                 method: 'GET'
             })
             .then(response => response.json())
