@@ -105,37 +105,38 @@ class Commander:
 
     @staticmethod
     def execute_move_stop():
-        Commander.execute(Commander.COMMAND_MOVE_STOP)
+        return Commander.execute(Commander.COMMAND_MOVE_STOP)
 
     @staticmethod
     def execute_led_stop():
-        Commander.execute(Commander.COMMAND_LED_STOP)
+        return Commander.execute(Commander.COMMAND_LED_STOP)
 
     @staticmethod
     def execute_look_home():
-        Commander.execute(Commander.COMMAND_LOOK_HOME)
+        return Commander.execute(Commander.COMMAND_LOOK_HOME)
 
     @staticmethod
     def execute_move_a_bit_forward(secs):
-        Commander.execute_move_for_given_seconds(Commander.COMMAND_MOVE_FORWARD, secs)
+        return Commander.execute_move_for_given_seconds(Commander.COMMAND_MOVE_FORWARD, secs)
 
     @staticmethod
     def execute_move_a_bit_backward(secs):
-        Commander.execute_move_for_given_seconds(Commander.COMMAND_MOVE_BACKWARD, secs)
+        return Commander.execute_move_for_given_seconds(Commander.COMMAND_MOVE_BACKWARD, secs)
 
     @staticmethod
     def execute_move_a_bit_left(secs):
-        Commander.execute_move_for_given_seconds(Commander.COMMAND_MOVE_TURN_LEFT, secs)
+        return Commander.execute_move_for_given_seconds(Commander.COMMAND_MOVE_TURN_LEFT, secs)
 
     @staticmethod
     def execute_move_a_bit_right(secs):
-        Commander.execute_move_for_given_seconds(Commander.COMMAND_MOVE_TURN_RIGHT, secs)
+        return Commander.execute_move_for_given_seconds(Commander.COMMAND_MOVE_TURN_RIGHT, secs)
 
     @staticmethod
     def execute_move_for_given_seconds(command, secs):
         Commander.execute(command)
         time.sleep(secs)
         Commander.execute(Commander.COMMAND_MOVE_STOP)
+        return True
 
     @staticmethod
     def help_commands():
