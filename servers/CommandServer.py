@@ -30,6 +30,17 @@ def set_move(mode):
         return f"Command {mode} not found", 400
 
 
+@app.route('/move_a_bit/<mode>/<secs>', methods=['POST'])
+def set_move_a_bit(mode, secs):
+    print(f"Setting move a bit mode: {mode}, secs: {secs}")
+    success = Commander.execute_move_for_given_seconds(f"move {mode}", secs)
+
+    if success:
+        return '', 204
+    else:
+        return f"Command {mode} not found", 400
+
+
 @app.route('/look/<mode>', methods=['POST'])
 def set_look(mode):
     print(f"Setting look mode: {mode}")

@@ -38,19 +38,19 @@
 <body>
     <div class="container">
         <div></div>
-        <button class="button" onclick="callRestAPI('forward')">Forward</button>
+        <button class="button" onclick="callRestAPI('forward',0.5)">Forward</button>
         <div></div>
-        <button class="button" onclick="callRestAPI('turn_left')">Left</button>
-        <button class="button" onclick="callRestAPI('stop')">Stop</button>
-        <button class="button" onclick="callRestAPI('turn_right')">Right</button>
+        <button class="button" onclick="callRestAPI('turn_left',0.15)">Left</button>
+        <button class="button" onclick="callRestAPI('stop',0.5)">Stop</button>
+        <button class="button" onclick="callRestAPI('turn_right',0.15)">Right</button>
         <div></div>
-        <button class="button" onclick="callRestAPI('backward')">Backward</button>
+        <button class="button" onclick="callRestAPI('backward',0.5)">Backward</button>
         <div></div>
     </div>
 
     <script>
-        function callRestAPI(button) {
-            fetch(`http://192.168.0.19:8088/move/${button}`, {
+        function callRestAPI(button,secs) {
+            fetch(`http://192.168.0.19:8088/move_a_bit/${button}/${secs}`, {
                 method: 'POST'
             })
             .then(response => response.json())
