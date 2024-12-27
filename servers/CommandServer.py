@@ -73,7 +73,7 @@ def set_say():
 
 @app.route('/ui', methods=['GET'])
 def get_ui():
-    return render_template('ui/ui.html')
+    return render_template('../ui/ui.html')
 
 
 def run_server():
