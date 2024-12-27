@@ -33,7 +33,7 @@ def set_move(mode):
 @app.route('/move_a_bit/<mode>/<secs>', methods=['POST'])
 def set_move_a_bit(mode, secs):
     print(f"Setting move a bit mode: {mode}, secs: {secs}")
-    success = Commander.execute_move_for_given_seconds(f"move {mode}", secs)
+    success = Commander.execute_move_for_given_seconds(f"move {mode}", float(secs))
 
     if success:
         return '', 204
