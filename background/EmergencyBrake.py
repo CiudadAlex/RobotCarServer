@@ -1,6 +1,7 @@
 from sensors.ObstacleDetector import ObstacleDetector
 from commanders.Commander import Commander
 from threading import Thread
+import time
 
 
 class EmergencyBrake(Thread):
@@ -26,3 +27,4 @@ class EmergencyBrake(Thread):
                 print("BRAKE!!!!!")
 
             print(f"EmergencyBrake active 2 = {self.active}")
+            time.sleep(0.15)
