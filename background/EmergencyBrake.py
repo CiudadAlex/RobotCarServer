@@ -14,6 +14,8 @@ class EmergencyBrake(Thread):
 
         while self.active:
 
+            print(f"EmergencyBrake active 1 = {self.active}")
+
             distance = ObstacleDetector.check_distance()
 
             if self.debug:
@@ -22,3 +24,5 @@ class EmergencyBrake(Thread):
             if distance < 0.15:
                 Commander.execute_move_stop()
                 print("BRAKE!!!!!")
+
+            print(f"EmergencyBrake active 2 = {self.active}")
