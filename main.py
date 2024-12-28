@@ -24,7 +24,7 @@ if __name__ == '__main__':
     audio_stream_server.start()
 
     print("######## Start EmergencyBrake")
-    emergency_brake = EmergencyBrake(debug=True)
+    emergency_brake = EmergencyBrake()
     emergency_brake.start()
 
     print("######## Start KeyboardCommander")
