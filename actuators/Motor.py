@@ -35,6 +35,7 @@ class Motor:
         GPIO.setup(Motor.Motor_B_Pin1, GPIO.OUT)
         GPIO.setup(Motor.Motor_B_Pin2, GPIO.OUT)
 
+        self.is_moving_forward = False
         self.stop()
 
         try:
@@ -44,14 +45,15 @@ class Motor:
         except Exception:
             traceback.print_exc(file=sys.stdout)
 
-    @staticmethod
-    def stop():
+    def stop(self):
         GPIO.output(Motor.Motor_A_Pin1, GPIO.LOW)
         GPIO.output(Motor.Motor_A_Pin2, GPIO.LOW)
         GPIO.output(Motor.Motor_B_Pin1, GPIO.LOW)
         GPIO.output(Motor.Motor_B_Pin2, GPIO.LOW)
         GPIO.output(Motor.Motor_A_EN, GPIO.LOW)
         GPIO.output(Motor.Motor_B_EN, GPIO.LOW)
+
+        self.is_moving_forward = False
 
     @staticmethod
     def motor_side(pwm, run, direction, speed, pin1, pin2, en):
@@ -79,6 +81,8 @@ class Motor:
         self.motor_side(self.pwm_A, run, direction, speed, Motor.Motor_A_Pin1, Motor.Motor_A_Pin2, Motor.Motor_A_EN)
 
     def move(self, speed_left, speed_right):
+
+        self.is_moving_forward = speed_left > 0 and speed_right > 0
 
         if speed_left == 0:
             self.motor_side_left(run=False, direction=-1, speed=-1)

@@ -139,6 +139,10 @@ class Commander:
         return True
 
     @staticmethod
+    def is_moving_forward():
+        return Commander.get_instance().motor.is_moving_forward
+
+    @staticmethod
     def help_commands():
         print("Command list:")
 

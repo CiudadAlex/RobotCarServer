@@ -20,7 +20,7 @@ class EmergencyBrake(Thread):
             if self.debug:
                 print(f"distance = {distance}")
 
-            if distance < 0.15:
+            if distance < 0.15 and Commander.is_moving_forward():
                 Commander.execute_move_stop()
                 print("BRAKE!!!!!")
 
