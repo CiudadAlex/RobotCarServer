@@ -1,6 +1,7 @@
-from flask import Flask, jsonify, request, render_template
+from flask import Flask, jsonify, request, render_template, make_response
 from commanders.Commander import Commander
 from tools.Text2SpeechEngine import Text2SpeechEngine
+from tools.DataStorage import DataStorage
 import threading
 import sys
 import traceback
@@ -85,6 +86,62 @@ def set_say():
 @app.route('/ui', methods=['GET'])
 def get_ui():
     return render_template('ui.html')
+
+
+@app.route('/room', methods=['POST'])
+def set_room():
+
+    data = request.get_json()
+    selected_room_id = data.selected_room_id
+    selected_room_name = data.selected_room_name
+    print(f"Store room: {selected_room_name}")
+
+    DataStorage.get_instance().selected_room_id = selected_room_id
+    DataStorage.get_instance().selected_room_name = selected_room_name
+
+    return '', 204
+
+
+@app.route('/room', methods=['GET'])
+def get_room():
+
+    selected_room_id = DataStorage.get_instance().selected_room_id
+    selected_room_name = DataStorage.get_instance().selected_room_name
+
+    data = {
+        'selected_room_id': selected_room_id,
+        'selected_room_name': selected_room_name
+    }
+
+    return make_response(jsonify(data), 200)
+
+
+@app.route('/door', methods=['POST'])
+def set_door():
+
+    data = request.get_json()
+    selected_door_id = data.selected_door_id
+    selected_door_name = data.selected_door_name
+    print(f"Store door: {selected_door_name}")
+
+    DataStorage.get_instance().selected_room_id = selected_door_id
+    DataStorage.get_instance().selected_room_name = selected_door_name
+
+    return '', 204
+
+
+@app.route('/door', methods=['GET'])
+def get_door():
+
+    selected_door_id = DataStorage.get_instance().selected_door_id
+    selected_door_name = DataStorage.get_instance().selected_door_name
+
+    data = {
+        'selected_door_id': selected_door_id,
+        'selected_door_name': selected_door_name
+    }
+
+    return make_response(jsonify(data), 200)
 
 
 def run_server():
