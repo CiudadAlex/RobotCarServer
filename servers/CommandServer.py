@@ -93,8 +93,8 @@ def set_room():
 
     try:
         data = request.get_json()
-        selected_room_id = data.selected_room_id
-        selected_room_name = data.selected_room_name
+        selected_room_id = data['selected_room_id']
+        selected_room_name = data['selected_room_name']
         print(f"Store room: {selected_room_name}")
 
         DataStorage.get_instance().selected_room_id = selected_room_id
@@ -125,8 +125,8 @@ def set_door():
 
     try:
         data = request.get_json()
-        selected_door_id = data.selected_door_id
-        selected_door_name = data.selected_door_name
+        selected_door_id = data['selected_door_id']
+        selected_door_name = data['selected_door_name']
         print(f"Store door: {selected_door_name}")
 
         DataStorage.get_instance().selected_room_id = selected_door_id
