@@ -156,6 +156,60 @@ def get_door():
     return make_response(jsonify(data), 200)
 
 
+@app.route('/room_list', methods=['POST'])
+def set_room_list():
+
+    try:
+        data = request.get_json()
+        room_list = data
+        print(f"Store room_list: {room_list}")
+
+        DataStorage.get_instance().room_list = room_list
+
+    except Exception:
+        traceback.print_exc(file=sys.stdout)
+
+    return '', 204
+
+
+@app.route('/room_list', methods=['GET'])
+def get_room_list():
+
+    room_list = DataStorage.get_instance().room_list
+
+    data = room_list
+    print(f"Retrieved room_list: {data}")
+
+    return data, 200
+
+
+@app.route('/door_list', methods=['POST'])
+def set_door_list():
+
+    try:
+        data = request.get_json()
+        door_list = data
+        print(f"Store door_list: {door_list}")
+
+        DataStorage.get_instance().door_list = door_list
+
+    except Exception:
+        traceback.print_exc(file=sys.stdout)
+
+    return '', 204
+
+
+@app.route('/door_list', methods=['GET'])
+def get_door_list():
+
+    door_list = DataStorage.get_instance().door_list
+
+    data = door_list
+    print(f"Retrieved door_list: {data}")
+
+    return data, 200
+
+
 def run_server():
     threading.Thread(target=lambda: app.run(host='0.0.0.0', port=8088, debug=False, use_reloader=False)).start()
 

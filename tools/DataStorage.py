@@ -18,3 +18,6 @@ class DataStorage:
         self.selected_door_id = None
         self.selected_door_name = None
 
+        self.room_list = None
+        self.door_list = None
+
