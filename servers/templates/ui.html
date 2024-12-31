@@ -38,24 +38,68 @@
 <body>
     <div class="container">
         <div></div>
-        <button class="button" onclick="callRestAPI('forward',1.0)">Forward</button>
+        <button class="button" onclick="callMoveRestAPI('forward',1.0)">Forward</button>
         <div></div>
-        <button class="button" onclick="callRestAPI('turn_left',0.15)">Left</button>
-        <button class="button" onclick="callRestAPI('stop',0.5)">Stop</button>
-        <button class="button" onclick="callRestAPI('turn_right',0.15)">Right</button>
+        <button class="button" onclick="callMoveRestAPI('turn_left',0.15)">Left</button>
+        <button class="button" onclick="callMoveRestAPI('stop',0.5)">Stop</button>
+        <button class="button" onclick="callMoveRestAPI('turn_right',0.15)">Right</button>
         <div></div>
-        <button class="button" onclick="callRestAPI('backward',1.0)">Backward</button>
+        <button class="button" onclick="callMoveRestAPI('backward',1.0)">Backward</button>
         <div></div>
     </div>
 
     <script>
-        function callRestAPI(button,secs) {
+        function callMoveRestAPI(button,secs) {
             fetch(`http://192.168.0.19:8088/move_a_bit/${button}/${secs}`, {
                 method: 'POST'
             })
             .then(response => response.json())
             .then(data => {
                 console.log(`Response from ${button}:`, data);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+
+        function callRoomRestAPI(selected_room_id,selected_room_name) {
+
+            const data = {
+              selected_room_id: selected_room_id,
+              selected_room_name: selected_room_name
+            };
+            fetch(`http://192.168.0.19:8088/room`, {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(`Response from room:`, data);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+
+        function callDoorRestAPI(selected_door_id,selected_door_name) {
+
+            const data = {
+              selected_door_id: selected_door_id,
+              selected_door_name: selected_door_name
+            };
+            fetch(`http://192.168.0.19:8088/door`, {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(`Response from door:`, data);
             })
             .catch(error => {
                 console.error('Error:', error);
