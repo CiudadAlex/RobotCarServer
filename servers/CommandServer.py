@@ -117,6 +117,8 @@ def get_room():
         'selected_room_name': selected_room_name
     }
 
+    print(f"Retrieved room: {data}")
+
     return make_response(jsonify(data), 200)
 
 
@@ -148,6 +150,8 @@ def get_door():
         'selected_door_id': selected_door_id,
         'selected_door_name': selected_door_name
     }
+
+    print(f"Retrieved door: {data}")
 
     return make_response(jsonify(data), 200)
 
