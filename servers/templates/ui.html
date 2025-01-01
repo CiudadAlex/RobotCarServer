@@ -43,14 +43,24 @@
         <button class="button" onclick="callMoveRestAPI('turn_left',0.15)">Left</button>
         <button class="button" onclick="callMoveRestAPI('stop',0.5)">Stop</button>
         <button class="button" onclick="callMoveRestAPI('turn_right',0.15)">Right</button>
-        <div></div>
+        <div>
+            <select id="combo_room">
+                <option value="">Select Room</option>
+            </select>
+        </div>
         <button class="button" onclick="callMoveRestAPI('backward',1.0)">Backward</button>
-        <div></div>
+        <div>
+            <select id="combo_door">
+                <option value="">Select Door</option>
+            </select>
+        </div>
     </div>
 
     <script>
+        const base_url = 'http://192.168.0.19:8088';
+
         function callMoveRestAPI(button,secs) {
-            fetch(`http://192.168.0.19:8088/move_a_bit/${button}/${secs}`, {
+            fetch(`${base_url}/move_a_bit/${button}/${secs}`, {
                 method: 'POST'
             })
             .then(response => response.json())
@@ -68,7 +78,7 @@
               selected_room_id: selected_room_id,
               selected_room_name: selected_room_name
             };
-            fetch(`http://192.168.0.19:8088/room`, {
+            fetch(`${base_url}/room`, {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json'
@@ -90,7 +100,7 @@
               selected_door_id: selected_door_id,
               selected_door_name: selected_door_name
             };
-            fetch(`http://192.168.0.19:8088/door`, {
+            fetch(`${base_url}/door`, {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json'
@@ -105,6 +115,45 @@
                 console.error('Error:', error);
             });
         }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const combobox = document.getElementById('combo_room');
+
+            fetch('${base_url}/room_list')
+                .then(response => response.json())
+                .then(data => {
+                    const list_rooms = data.split(',');
+                    list_rooms.forEach(room => {
+                        const opt = document.createElement('option');
+                        opt.value = room;
+                        opt.textContent = room;
+                        combobox.appendChild(opt);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error retrieving the room options:', error);
+                });
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const combobox = document.getElementById('combo_door');
+
+            fetch('${base_url}/door_list')
+                .then(response => response.json())
+                .then(data => {
+                    const list_doors = data.split(',');
+                    list_doors.forEach(door => {
+                        const opt = document.createElement('option');
+                        opt.value = door;
+                        opt.textContent = door;
+                        combobox.appendChild(opt);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error retrieving the door options:', error);
+                });
+        });
+
     </script>
 </body>
 </html>
