@@ -9,3 +9,11 @@
 >> sudo raspi-config
 
 # And then navigate to "Interface Options" and then enable i2c
+
+
+# Install On StartUp command:
+sudo crontab -e
+# Then enter the line in the file:
+@reboot sh /home/pi/RobotCarServer/start.sh >/home/pi/logs/cronlog 2>&1 &
+
+
