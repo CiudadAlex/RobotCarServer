@@ -2,6 +2,9 @@ from managers.LedStripManager import LedStripManager
 from actuators.Motor import Motor
 from actuators.CameraTilt import CameraTilt
 from servers.AudioStreamServer import AudioStreamServer
+from tools.Text2SpeechEngine import Text2SpeechEngine
+import sys
+import traceback
 import os
 import time
 
@@ -33,6 +36,8 @@ class Commander:
 
     COMMAND_LISTEN_ON = "listen on"
     COMMAND_LISTEN_OFF = "listen off"
+
+    COMMAND_SAY_TEST = "say test"
 
     COMMAND_EXIT = "exit"
 
@@ -75,6 +80,8 @@ class Commander:
 
             Commander.COMMAND_LISTEN_ON: self.listen_on,
             Commander.COMMAND_LISTEN_OFF: self.listen_off,
+
+            Commander.COMMAND_SAY_TEST: self.say_test,
 
             Commander.COMMAND_EXIT: self.exit
         }
@@ -141,6 +148,16 @@ class Commander:
     @staticmethod
     def is_moving_forward():
         return Commander.get_instance().motor.is_moving_forward
+
+    @staticmethod
+    def say_test():
+
+        text_to_say = "This robot has been engineered by Alejandro"
+
+        try:
+            Text2SpeechEngine.get_instance().say(text_to_say)
+        except Exception:
+            traceback.print_exc(file=sys.stdout)
 
     @staticmethod
     def help_commands():
