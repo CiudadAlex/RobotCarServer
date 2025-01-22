@@ -34,6 +34,9 @@ sudo apt install -y python3-picamera2
 sudo apt install -y pulseaudio
 sudo apt install -y jackd2
 
+# Speak
+sudo apt install -y espeak
+
 # Firewall
 sudo apt install -y ufw
 sudo ufw --force enable
