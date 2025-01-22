@@ -123,6 +123,10 @@ class Commander:
         return Commander.execute(Commander.COMMAND_LOOK_HOME)
 
     @staticmethod
+    def execute_look_up():
+        return Commander.execute(Commander.COMMAND_LOOK_UP)
+
+    @staticmethod
     def execute_move_a_bit_forward(secs):
         return Commander.execute_move_for_given_seconds(Commander.COMMAND_MOVE_FORWARD, secs)
 

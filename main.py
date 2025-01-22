@@ -4,6 +4,7 @@ from servers.AudioStreamServer import AudioStreamServer
 from servers import CommandServer
 from commanders.Commander import Commander
 from background.EmergencyBrake import EmergencyBrake
+import time
 
 
 if __name__ == '__main__':
@@ -11,6 +12,9 @@ if __name__ == '__main__':
     Commander.execute_move_stop()
     Commander.execute_led_stop()
     Commander.execute_look_home()
+
+    time.sleep(0.2)
+    Commander.execute_look_up()
 
     print("######## Start CommandServer")
     CommandServer.run_server()
