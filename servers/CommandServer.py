@@ -2,6 +2,7 @@ from flask import Flask, jsonify, request, render_template, make_response
 from commanders.Commander import Commander
 from tools.Text2SpeechEngine import Text2SpeechEngine
 from tools.DataStorage import DataStorage
+from tools.PermanentDataStorage import PermanentDataStorage
 import threading
 import sys
 import traceback
@@ -164,7 +165,7 @@ def set_room_list():
         room_list = data
         print(f"Store room_list: {room_list}")
 
-        DataStorage.get_instance().room_list = room_list
+        PermanentDataStorage.get_instance().store_room_list(room_list)
 
     except Exception:
         traceback.print_exc(file=sys.stdout)
@@ -175,7 +176,7 @@ def set_room_list():
 @app.route('/room_list', methods=['GET'])
 def get_room_list():
 
-    room_list = DataStorage.get_instance().room_list
+    room_list = PermanentDataStorage.get_instance().get_room_list()
 
     data = room_list
     print(f"Retrieved room_list: {data}")
@@ -191,7 +192,7 @@ def set_door_list():
         door_list = data
         print(f"Store door_list: {door_list}")
 
-        DataStorage.get_instance().door_list = door_list
+        PermanentDataStorage.get_instance().store_door_list(door_list)
 
     except Exception:
         traceback.print_exc(file=sys.stdout)
@@ -202,7 +203,7 @@ def set_door_list():
 @app.route('/door_list', methods=['GET'])
 def get_door_list():
 
-    door_list = DataStorage.get_instance().door_list
+    door_list = PermanentDataStorage.get_instance().get_door_list()
 
     data = door_list
     print(f"Retrieved door_list: {data}")
