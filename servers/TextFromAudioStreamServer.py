@@ -2,7 +2,7 @@ from servers.AbstractStreamServer import AbstractStreamServer
 from tools.Speech2TextProcessor import Speech2TextProcessor
 
 
-class TextStreamServer(AbstractStreamServer):
+class TextFromAudioStreamServer(AbstractStreamServer):
 
     def __init__(self):
         super().__init__(port=7999, check_collect_interval_millis=500, check_send_interval_millis=500)
