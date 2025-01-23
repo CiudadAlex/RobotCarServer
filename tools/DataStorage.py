@@ -21,3 +21,5 @@ class DataStorage:
         self.room_list = None
         self.door_list = None
 
+        self.last_text_command = None
+

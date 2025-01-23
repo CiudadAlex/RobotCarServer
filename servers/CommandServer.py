@@ -211,6 +211,22 @@ def get_door_list():
     return data, 200
 
 
+@app.route('/text_command', methods=['POST'])
+def execute_text_command():
+
+    try:
+        data = request.get_json()
+        text_command = data
+        print(f"Store text_command: {text_command}")
+
+        DataStorage.get_instance().last_text_command = text_command
+
+    except Exception:
+        traceback.print_exc(file=sys.stdout)
+
+    return '', 204
+
+
 def run_server():
     threading.Thread(target=lambda: app.run(host='0.0.0.0', port=8088, debug=False, use_reloader=False)).start()
 
