@@ -72,26 +72,31 @@
             });
         }
 
+        function callSimplePostRestAPI(command,dto) {
+
+            fetch(`${base_url}/${command}`, {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(dto)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(`Response from ${command}:`, data);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+
         function callRoomRestAPI(selected_room_id,selected_room_name) {
 
             const data = {
               selected_room_id: selected_room_id,
               selected_room_name: selected_room_name
             };
-            fetch(`${base_url}/room`, {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log(`Response from room:`, data);
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
+            callSimplePostRestAPI('room',data)
         }
 
         function callDoorRestAPI(selected_door_id,selected_door_name) {
@@ -100,20 +105,11 @@
               selected_door_id: selected_door_id,
               selected_door_name: selected_door_name
             };
-            fetch(`${base_url}/door`, {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log(`Response from door:`, data);
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
+            callSimplePostRestAPI('door',data)
+        }
+
+        function callTextCommandRestAPI(command) {
+            callSimplePostRestAPI('text_command',command)
         }
 
         function fillComboboxRoom() {
