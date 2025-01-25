@@ -130,7 +130,7 @@
                 });
 
             combobox.addEventListener('change', function() {
-                const selected_room_id = combobox.selectedIndex
+                const selected_room_id = combobox.selectedIndex - 1;
                 const selected_room_name = combobox.value;
                 if (selected_room_name) {
                     callRoomRestAPI(selected_room_id,selected_room_name)
@@ -157,7 +157,7 @@
                 });
 
             combobox.addEventListener('change', function() {
-                const selected_door_id = combobox.selectedIndex
+                const selected_door_id = combobox.selectedIndex - 1;
                 const selected_door_name = combobox.value;
                 if (selected_door_name) {
                     callDoorRestAPI(selected_door_id,selected_door_name)
