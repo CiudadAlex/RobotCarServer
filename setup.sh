@@ -36,7 +36,6 @@ sudo apt install -y jackd2
 
 # Speak
 sudo apt install -y espeak
-sudo ./.venv/bin/pip3 install python-espeak==0.6.3
 
 # Firewall
 sudo apt install -y ufw

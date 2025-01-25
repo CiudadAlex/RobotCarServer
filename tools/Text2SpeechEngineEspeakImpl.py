@@ -1,4 +1,4 @@
-import espeak
+import subprocess
 
 
 class Text2SpeechEngineEspeakImpl:
@@ -12,11 +12,18 @@ class Text2SpeechEngineEspeakImpl:
         return Text2SpeechEngineEspeakImpl.instance
 
     def __init__(self):
+        self.process = None
 
-        espeak.init()
-        self.speaker = espeak.Espeak()
+    def stop(self):
+
+        if self.process is not None:
+            self.process.terminate()
+
+        self.process = None
 
     def say(self, text):
 
-        self.speaker.say(text)
+        self.stop()
 
+        self.process = subprocess.Popen(["espeak", f"{text}"])
+        return self.process.wait()
