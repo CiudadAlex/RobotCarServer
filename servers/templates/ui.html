@@ -115,7 +115,7 @@
         function fillComboboxRoom() {
             const combobox = document.getElementById('combo_room');
 
-            fetch('${base_url}/room_list')
+            fetch('/room_list')
                 .then(response => response.json())
                 .then(data => {
                     const list_rooms = data.split(',');
@@ -142,7 +142,7 @@
         function fillComboboxDoor() {
             const combobox = document.getElementById('combo_door');
 
-            fetch('${base_url}/door_list')
+            fetch('/door_list')
                 .then(response => response.json())
                 .then(data => {
                     const list_doors = data.split(',');

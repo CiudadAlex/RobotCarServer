@@ -46,8 +46,8 @@ class PermanentDataStorage:
         self.write_file(self.get_door_list_path(), text)
 
     def get_room_list(self):
-        self.read_file(self.get_room_list_path())
+        return self.read_file(self.get_room_list_path())
 
     def get_door_list(self):
-        self.read_file(self.get_door_list_path())
+        return self.read_file(self.get_door_list_path())
 
