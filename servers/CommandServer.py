@@ -178,7 +178,7 @@ def get_room_list():
 
     room_list = PermanentDataStorage.get_instance().get_room_list()
 
-    data = room_list
+    data = room_list.split(',')
     print(f"Retrieved room_list: {data}")
 
     return data, 200
@@ -205,7 +205,7 @@ def get_door_list():
 
     door_list = PermanentDataStorage.get_instance().get_door_list()
 
-    data = door_list
+    data = door_list.split(',')
     print(f"Retrieved door_list: {data}")
 
     return data, 200
