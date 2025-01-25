@@ -13,7 +13,7 @@ class PermanentDataStorage:
 
     @staticmethod
     def get_storage_path():
-        storage_path = Path(__file__).parent.parent.resolve() + "/.storage"
+        storage_path = str(Path(__file__).parent.parent.resolve()) + "/.storage"
         Path(storage_path).mkdir(parents=True, exist_ok=True)
         return storage_path
 
