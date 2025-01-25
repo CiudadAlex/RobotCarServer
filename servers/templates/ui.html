@@ -118,7 +118,7 @@
             fetch('/room_list')
                 .then(response => response.json())
                 .then(data => {
-                    const list_rooms = data.split(',');
+                    const list_rooms = data;
                     list_rooms.forEach(room => {
                         const opt = document.createElement('option');
                         opt.value = room;
@@ -145,7 +145,7 @@
             fetch('/door_list')
                 .then(response => response.json())
                 .then(data => {
-                    const list_doors = data.split(',');
+                    const list_doors = data;
                     list_doors.forEach(door => {
                         const opt = document.createElement('option');
                         opt.value = door;
