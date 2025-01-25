@@ -81,9 +81,8 @@
                 },
                 body: JSON.stringify(dto)
             })
-            .then(response => response.json())
-            .then(data => {
-                console.log(`Response from ${command}:`, data);
+            .then(response => {
+                console.log(`Response from ${command}:`, response);
             })
             .catch(error => {
                 console.error('Error:', error);
