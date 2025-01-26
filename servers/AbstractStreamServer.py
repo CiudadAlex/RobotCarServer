@@ -7,7 +7,7 @@ from utils.TimeRegulator import TimeRegulator
 
 class AbstractStreamServer(Thread):
 
-    def __init__(self, port, check_collect_interval_millis, check_send_interval_millis):
+    def __init__(self, port, check_collect_interval_millis, check_send_interval_millis, debug=False):
         super().__init__()
         self.port = port
         self.check_collect_interval_millis = check_collect_interval_millis
@@ -15,6 +15,7 @@ class AbstractStreamServer(Thread):
         self.last_item = None
         self.last_item_id = 0
         self.lock = threading.Lock()
+        self.debug = debug
 
     def get_last_item(self):
 
@@ -36,7 +37,7 @@ class AbstractStreamServer(Thread):
 
         while True:
             connection = server_socket.accept()[0].makefile('rwb')
-            thread_sender = StreamSender(self, connection, self.check_send_interval_millis)
+            thread_sender = StreamSender(self, connection, self.check_send_interval_millis, self.debug)
             thread_sender.start()
 
     def collect_items(self):
@@ -61,13 +62,13 @@ class AbstractStreamServer(Thread):
 
 class StreamSender(Thread):
 
-    def __init__(self, stream_server, connection, check_send_interval_millis):
+    def __init__(self, stream_server, connection, check_send_interval_millis, debug):
         super().__init__()
         self.last_item_id = None
         self.stream_server = stream_server
         self.connection = connection
         self.check_send_interval_millis = check_send_interval_millis
-        self.debug = True
+        self.debug = debug
 
     def run(self):
 
