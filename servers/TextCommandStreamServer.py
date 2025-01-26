@@ -18,6 +18,7 @@ class TextCommandStreamServer(AbstractStreamServer):
         item_metadata = bytes("Text", 'utf-8')
 
         DataStorage.get_instance().last_text_command = None
+        print(f"### Sending text command: {last_text_command}")
 
         return item_metadata, text_bytes
 
