@@ -8,7 +8,7 @@ from background.EmergencyBrake import EmergencyBrake
 import time
 
 
-if __name__ == '__main__2':
+if __name__ == '__main__':
 
     Commander.execute_move_stop()
     Commander.execute_led_stop()
@@ -40,10 +40,3 @@ if __name__ == '__main__2':
     keyboard_commander = KeyboardCommander()
     keyboard_commander.start()
 
-from pyt2s.services import stream_elements
-
-print("######## Start")
-# Default Voice
-data = stream_elements.requestTTS('Lorem Ipsum is simply dummy text.')
-
-print("######## End")
