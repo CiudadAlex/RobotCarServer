@@ -5,7 +5,8 @@ from tools.DataStorage import DataStorage
 class TextCommandStreamServer(AbstractStreamServer):
 
     def __init__(self):
-        super().__init__(port=7999, check_collect_interval_millis=500, check_send_interval_millis=500, debug=True)
+        super().__init__(port=7999, check_collect_interval_millis=500, check_send_interval_millis=500,
+                         debug=True, clear_after_send=True)
 
     def get_new_item_metadata_and_bytes(self):
 

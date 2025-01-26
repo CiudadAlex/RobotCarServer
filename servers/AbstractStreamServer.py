@@ -7,7 +7,7 @@ from utils.TimeRegulator import TimeRegulator
 
 class AbstractStreamServer(Thread):
 
-    def __init__(self, port, check_collect_interval_millis, check_send_interval_millis, debug=False):
+    def __init__(self, port, check_collect_interval_millis, check_send_interval_millis, debug=False, clear_after_send=False):
         super().__init__()
         self.port = port
         self.check_collect_interval_millis = check_collect_interval_millis
@@ -16,6 +16,7 @@ class AbstractStreamServer(Thread):
         self.last_item_id = 0
         self.lock = threading.Lock()
         self.debug = debug
+        self.clear_after_send = clear_after_send
 
     def get_last_item(self):
 
@@ -37,7 +38,7 @@ class AbstractStreamServer(Thread):
 
         while True:
             connection = server_socket.accept()[0].makefile('rwb')
-            thread_sender = StreamSender(self, connection, self.check_send_interval_millis, self.debug)
+            thread_sender = StreamSender(self, connection, self.check_send_interval_millis, self.debug, self.clear_after_send)
             thread_sender.start()
 
     def collect_items(self):
@@ -62,13 +63,14 @@ class AbstractStreamServer(Thread):
 
 class StreamSender(Thread):
 
-    def __init__(self, stream_server, connection, check_send_interval_millis, debug):
+    def __init__(self, stream_server, connection, check_send_interval_millis, debug, clear_after_send):
         super().__init__()
         self.last_item_id = None
         self.stream_server = stream_server
         self.connection = connection
         self.check_send_interval_millis = check_send_interval_millis
         self.debug = debug
+        self.clear_after_send = clear_after_send
 
     def run(self):
 
@@ -87,12 +89,18 @@ class StreamSender(Thread):
                 continue
 
             self.last_item_id = last_item.item_id
-            self.send_item_bytes_to_connection(last_item.item_metadata, last_item.item_bytes)
+            self.send_item_bytes_to_connection(last_item)
 
-    def send_item_bytes_to_connection(self, item_metadata, item_bytes):
+            if self.clear_after_send:
+                self.stream_server.set_last_item(None)
+
+    def send_item_bytes_to_connection(self, item):
+
+        item_metadata = item.item_metadata
+        item_bytes = item.item_bytes
 
         if self.debug:
-            print(f"Sending: {item_metadata}")
+            print(f">> Sending: {item.item_id} >> {item_metadata}")
 
         metadata_size = len(item_metadata)
         self.connection.write(struct.pack('>I', metadata_size))
