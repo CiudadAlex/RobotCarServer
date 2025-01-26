@@ -42,5 +42,8 @@ if __name__ == '__main__2':
 
 from pyt2s.services import stream_elements
 
+print("######## Start")
 # Default Voice
 data = stream_elements.requestTTS('Lorem Ipsum is simply dummy text.')
+
+print("######## End")
