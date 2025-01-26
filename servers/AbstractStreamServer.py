@@ -67,6 +67,7 @@ class StreamSender(Thread):
         self.stream_server = stream_server
         self.connection = connection
         self.check_send_interval_millis = check_send_interval_millis
+        self.debug = True
 
     def run(self):
 
@@ -85,22 +86,24 @@ class StreamSender(Thread):
                 continue
 
             self.last_item_id = last_item.item_id
-            self.send_item_bytes_to_connection(last_item.item_metadata, last_item.item_bytes, self.connection)
+            self.send_item_bytes_to_connection(last_item.item_metadata, last_item.item_bytes)
 
-    @staticmethod
-    def send_item_bytes_to_connection(item_metadata, item_bytes, connection):
+    def send_item_bytes_to_connection(self, item_metadata, item_bytes):
+
+        if self.debug:
+            print(f"Sending: {item_metadata}")
 
         metadata_size = len(item_metadata)
-        connection.write(struct.pack('>I', metadata_size))
-        connection.flush()
-        connection.write(item_metadata)
-        connection.flush()
+        self.connection.write(struct.pack('>I', metadata_size))
+        self.connection.flush()
+        self.connection.write(item_metadata)
+        self.connection.flush()
 
         item_size = len(item_bytes)
-        connection.write(struct.pack('>I', item_size))
-        connection.flush()
-        connection.write(item_bytes)
-        connection.flush()
+        self.connection.write(struct.pack('>I', item_size))
+        self.connection.flush()
+        self.connection.write(item_bytes)
+        self.connection.flush()
 
 
 class Item:
