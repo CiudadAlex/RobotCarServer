@@ -8,7 +8,7 @@ from background.EmergencyBrake import EmergencyBrake
 import time
 
 
-if __name__ == '__main__':
+def init():
 
     Commander.execute_move_stop()
     Commander.execute_led_stop()
@@ -16,6 +16,13 @@ if __name__ == '__main__':
 
     time.sleep(0.2)
     Commander.execute_look_up()
+    time.sleep(0.2)
+    Commander.execute_look_up()
+
+
+if __name__ == '__main__':
+
+    init()
 
     print("######## Start CommandServer")
     CommandServer.run_server()
