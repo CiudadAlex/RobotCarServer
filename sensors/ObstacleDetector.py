@@ -4,6 +4,9 @@ import time
 
 class ObstacleDetector:
 
+    """
+    Returns the distance in meters
+    """
     @staticmethod
     def check_distance():
 
