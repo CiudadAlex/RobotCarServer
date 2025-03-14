@@ -23,3 +23,5 @@ class DataStorage:
 
         self.last_text_command = None
 
+        self.enabled_emergency_brake = True
+

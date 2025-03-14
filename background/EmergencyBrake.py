@@ -1,5 +1,6 @@
 from sensors.ObstacleDetector import ObstacleDetector
 from commanders.Commander import Commander
+from tools.DataStorage import DataStorage
 from threading import Thread
 import time
 
@@ -8,12 +9,11 @@ class EmergencyBrake(Thread):
 
     def __init__(self, debug=False):
         super().__init__()
-        self.active = True
         self.debug = debug
 
     def run(self):
 
-        while self.active:
+        while DataStorage.get_instance().enabled_emergency_brake:
 
             distance = ObstacleDetector.check_distance()
 
