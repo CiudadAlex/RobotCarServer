@@ -3,6 +3,7 @@ from commanders.Commander import Commander
 from tools.Text2SpeechEngine import Text2SpeechEngine
 from tools.DataStorage import DataStorage
 from tools.PermanentDataStorage import PermanentDataStorage
+from complexcommands.WallFollower import WallFollower
 import threading
 import sys
 import traceback
@@ -80,6 +81,24 @@ def set_say():
         traceback.print_exc(file=sys.stdout)
 
     Commander.listen_on()
+
+    return '', 204
+
+
+@app.route('/wall-follower/start', methods=['POST'])
+def wall_follower_start():
+
+    print(f"Wall-follower started")
+    WallFollower.get_instance().execute()
+
+    return '', 204
+
+
+@app.route('/wall-follower/stop', methods=['POST'])
+def wall_follower_stop():
+
+    print(f"Wall-follower started")
+    WallFollower.get_instance().stop()
 
     return '', 204
 

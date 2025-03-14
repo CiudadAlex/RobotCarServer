@@ -21,6 +21,7 @@ class WallFollower:
         self.running = False
 
     def execute(self):
+
         self.running = True
 
         DataStorage.get_instance().enabled_emergency_brake = False
