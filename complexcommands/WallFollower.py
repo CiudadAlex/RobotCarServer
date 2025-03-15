@@ -10,8 +10,11 @@ class WallFollower:
     CLOSE_METERS = 0.3
     FAR_AWAY_METERS = 1.0
 
-    FORWARD_SECS = 0.7
-    TURN_SECS = 0.12
+    FORWARD_LONG_SECS = 0.7
+    FORWARD_SHORT_SECS = 0.4
+
+    TURN_LONG_SECS = 0.25
+    TURN_SHORT_SECS = 0.12
 
     instance = None
 
@@ -54,13 +57,19 @@ class WallFollower:
             self.in_contact = True
 
         if not self.in_contact:
-            Commander.execute_move_a_bit_forward(WallFollower.FORWARD_SECS)
+            Commander.execute_move_a_bit_forward(WallFollower.FORWARD_LONG_SECS)
             return
 
-        if distance > WallFollower.CLOSE_METERS:
-            Commander.execute_move_a_bit_forward(WallFollower.FORWARD_SECS)
-            return
+        # in_contact is True
+        if distance > WallFollower.FAR_AWAY_METERS:
+            Commander.execute_move_a_bit_right(WallFollower.TURN_LONG_SECS)
+            Commander.execute_move_a_bit_forward(WallFollower.FORWARD_SHORT_SECS)
 
-        Commander.execute_move_a_bit_right(WallFollower.TURN_SECS)
+        elif distance > WallFollower.CLOSE_METERS:
+            Commander.execute_move_a_bit_right(WallFollower.TURN_SHORT_SECS)
+            Commander.execute_move_a_bit_forward(WallFollower.FORWARD_SHORT_SECS)
 
+        else:
+            Commander.execute_move_a_bit_left(WallFollower.TURN_SHORT_SECS)
+            Commander.execute_move_a_bit_forward(WallFollower.FORWARD_SHORT_SECS)
 
