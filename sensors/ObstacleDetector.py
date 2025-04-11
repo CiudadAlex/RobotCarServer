@@ -17,7 +17,7 @@ class ObstacleDetector:
             sum_distances = sum_distances + distance
 
             # Let it recover and stop the ultrasound echoes
-            time.sleep(0.15)
+            time.sleep(0.2)
 
         return sum_distances / number_of_checks
 

@@ -46,6 +46,7 @@ class WallFollower:
 
             distance = ObstacleDetector.check_averaged_distance()
             self.take_action(distance)
+            time.sleep(5)
 
             # Let it recover and stop the ultrasound echoes
             time.sleep(0.15)
@@ -55,7 +56,6 @@ class WallFollower:
     def take_action(self, distance):
 
         print(f"Action with distance: {distance}")
-        time.sleep(5)
 
         if distance < WallFollower.CLOSE_METERS:
             self.in_contact = True
