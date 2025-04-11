@@ -99,7 +99,7 @@ class Commander:
         AudioStreamServer.listening = False
 
     @staticmethod
-    def execute(command):
+    def execute(command, debug=False):
 
         if command not in Commander.get_instance().command_map.keys():
             Commander.help_commands()
@@ -107,7 +107,8 @@ class Commander:
         else:
             func = Commander.get_instance().command_map[command]
             func()
-            print("Executed")
+            if debug:
+                print("Executed")
             return True
 
     @staticmethod
