@@ -8,6 +8,23 @@ class ObstacleDetector:
     Returns the distance in meters
     """
     @staticmethod
+    def check_averaged_distance(number_of_checks=3):
+
+        sum_distances = 0
+
+        for i in range(number_of_checks):
+            distance = ObstacleDetector.check_distance()
+            sum_distances = sum_distances + distance
+
+            # Let it recover and stop the ultrasound echoes
+            time.sleep(0.15)
+
+        return sum_distances / number_of_checks
+
+    """
+    Returns the distance in meters
+    """
+    @staticmethod
     def check_distance():
 
         Tr = 11

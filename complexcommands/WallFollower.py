@@ -7,11 +7,11 @@ import threading
 
 class WallFollower:
 
-    CLOSE_METERS = 0.3
+    CLOSE_METERS = 0.45
     FAR_AWAY_METERS = 1.0
 
-    FORWARD_LONG_SECS = 0.7
-    FORWARD_SHORT_SECS = 0.4
+    FORWARD_LONG_SECS = 0.5
+    FORWARD_SHORT_SECS = 0.3
 
     TURN_LONG_SECS = 0.25
     TURN_SHORT_SECS = 0.12
@@ -43,7 +43,7 @@ class WallFollower:
 
         while self.running:
 
-            distance = ObstacleDetector.check_distance()
+            distance = ObstacleDetector.check_averaged_distance()
             self.take_action(distance)
 
             # Let it recover and stop the ultrasound echoes
