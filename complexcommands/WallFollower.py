@@ -7,14 +7,15 @@ import threading
 
 class WallFollower:
 
+    TOO_CLOSE_METERS = 0.1
     CLOSE_METERS = 0.45
     FAR_AWAY_METERS = 1.0
 
     FORWARD_LONG_SECS = 0.5
-    FORWARD_SHORT_SECS = 0.3
+    FORWARD_SHORT_SECS = 0.2
 
-    TURN_LONG_SECS = 0.25
-    TURN_SHORT_SECS = 0.12
+    TURN_LONG_SECS = 0.3
+    TURN_SHORT_SECS = 0.2
 
     instance = None
 
@@ -55,6 +56,9 @@ class WallFollower:
 
         if distance < WallFollower.CLOSE_METERS:
             self.in_contact = True
+
+        if distance < WallFollower.TOO_CLOSE_METERS:
+            Commander.execute_move_a_bit_backward(WallFollower.FORWARD_SHORT_SECS)
 
         if not self.in_contact:
             Commander.execute_move_a_bit_forward(WallFollower.FORWARD_LONG_SECS)
