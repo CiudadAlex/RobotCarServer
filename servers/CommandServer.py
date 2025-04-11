@@ -97,7 +97,7 @@ def wall_follower_start():
 @app.route('/wall-follower/stop', methods=['POST'])
 def wall_follower_stop():
 
-    print(f"Wall-follower started")
+    print(f"Wall-follower stop")
     WallFollower.get_instance().stop()
 
     return '', 204
