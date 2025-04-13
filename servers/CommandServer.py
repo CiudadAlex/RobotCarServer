@@ -4,6 +4,7 @@ from tools.Text2SpeechEngine import Text2SpeechEngine
 from tools.DataStorage import DataStorage
 from tools.PermanentDataStorage import PermanentDataStorage
 from complexcommands.WallFollower import WallFollower
+from sensors.ObstacleDetector import ObstacleDetector
 import threading
 import sys
 import traceback
@@ -244,6 +245,16 @@ def execute_text_command():
         traceback.print_exc(file=sys.stdout)
 
     return '', 204
+
+
+@app.route('/distance_to_obstacle', methods=['GET'])
+def get_distance_to_obstacle():
+
+    distance = ObstacleDetector.check_averaged_distance()
+
+    print(f"Distance to obstacle: {distance}")
+
+    return distance, 200
 
 
 def run_server():
