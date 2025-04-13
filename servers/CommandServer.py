@@ -254,7 +254,7 @@ def get_distance_to_obstacle():
 
     print(f"Distance to obstacle: {distance}")
 
-    return distance, 200
+    return str(distance), 200
 
 
 def run_server():
